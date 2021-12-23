@@ -25,7 +25,9 @@ html{
                 li{
                     list-style: none;
                     padding: 0 2vw;
-                    
+                    :hover{
+                        text-decoration: underline;
+                    }
                     a{
                         text-decoration: 0;
                         font-family: 'Quantico', sans-serif;
@@ -78,8 +80,10 @@ html{
                         p{
                             margin: 0;
                             color: #fff;
-                            font-size: 1.2vw; 
+                            font-size: 1.2vw;
+                            
                         }
+                        
                     }
                     .heroimg{
                         position: absolute;
@@ -111,16 +115,24 @@ html{
                 display: flex;
                 justify-content: space-around;
                 align-items: center;
+                :hover{
+                    top: -10px;
+                }
                 .cards{
                     height: 18vh;
                     width: 18vh;
                     border-radius: 1vw;
                     text-align: center;
-                    background-color: #fff;
+                    background-color: rgb(255, 255, 255);
                     display: flex;
                     justify-content: space-around;
                     align-items: center;
                     box-shadow: 2px 2px 10px 5px #888888;
+                    position: relative;
+                    cursor: pointer;
+                    z-index: 1000000;
+                    
+                    transition: top ease 0.5s;
                     img{
                         height: 4vw;
                         width: 4vw;
@@ -157,6 +169,9 @@ html{
                 img{
                     height: 1.5vh;
                 }
+                :hover{
+                    top: -10px;
+                }
                 .cards{
                     height: 18vh;
                     width: 18vh;
@@ -170,6 +185,9 @@ html{
                     font-size: 1.5vw;
                     font-weight: 500;
                     box-shadow: 1px 1px 10px 1px #5c93fa;
+                    cursor: pointer;
+                    position: relative;
+                    
                 }
             }
         }
