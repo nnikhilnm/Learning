@@ -1,0 +1,345 @@
+@import url("https://fonts.googleapis.com/css2?family=Quantico:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap");
+html body {
+  padding: 0;
+  margin: 0;
+  background-color: #F6F6F6;
+}
+
+html body header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 5vh;
+  border-bottom: 4px solid #00A0FB;
+}
+
+html body header .logo {
+  padding: 0 1vw;
+  font-family: 'Quantico', sans-serif;
+  font-size: 1.5vw;
+}
+
+html body header ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+html body header ul .becometutor {
+  border-right: 3px solid #00A0FB;
+}
+
+html body header ul li {
+  list-style: none;
+  padding: 0 2vw;
+}
+
+html body header ul li a {
+  -webkit-text-decoration: 0;
+          text-decoration: 0;
+  font-family: 'Quantico', sans-serif;
+  color: #000;
+}
+
+html body .hero {
+  height: 70vh;
+  background-color: #D4DEFF;
+  width: 80vw;
+  margin-right: auto;
+  margin-left: auto;
+  padding-top: 0;
+  margin-top: 0;
+  border: 0.5px solid #43dff3;
+}
+
+html body .hero h2 {
+  font-size: 2vw;
+  margin: 0 0 2vh 0;
+  font-family: 'Quantico', sans-serif;
+}
+
+html body .hero .container {
+  width: 80vw;
+}
+
+html body .hero .container .heroinfo {
+  height: 75vh;
+  width: 80vw;
+  position: relative;
+  padding: 1vw;
+}
+
+html body .hero .container .heroinfo h3 {
+  font-family: 'Quantico', sans-serif;
+  font-size: 1.8vw;
+}
+
+html body .hero .container .heroinfo p {
+  margin-top: 10vh;
+  font-family: 'Quantico', sans-serif;
+  font-size: 1.5vw;
+}
+
+html body .hero .container .heroinfo .submitasgn {
+  margin-top: 10vh;
+  height: 8vh;
+  width: 12vw;
+  background-color: #008FF6;
+  border-radius: 3vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  cursor: pointer;
+}
+
+html body .hero .container .heroinfo .submitasgn p {
+  margin: 0;
+  color: #fff;
+  font-size: 1.2vw;
+}
+
+html body .hero .container .heroinfo .heroimg {
+  position: absolute;
+  right: 2vw;
+  bottom: 15vh;
+}
+
+html body .hero .container .heroinfo .heroimg img {
+  width: 30vw;
+}
+
+html body .subjects {
+  margin-top: 10vh;
+  height: 45vh;
+  background-color: #d2d2d2;
+  font-family: 'Roboto', sans-serif;
+}
+
+html body .subjects h3 {
+  padding: 2vh;
+  font-family: 'Roboto', sans-serif;
+}
+
+html body .subjects h4 {
+  color: #686868;
+  font-weight: 500;
+}
+
+html body .subjects .row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+html body .subjects .row .cards {
+  height: 18vh;
+  width: 18vh;
+  border-radius: 1vw;
+  text-align: center;
+  background-color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-shadow: 2px 2px 10px 5px #888888;
+          box-shadow: 2px 2px 10px 5px #888888;
+}
+
+html body .subjects .row .cards img {
+  height: 4vw;
+  width: 4vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+html body .subjects .row .cards .linkclass {
+  text-decoration: none;
+  color: #000;
+  font-size: 1.2vw;
+}
+
+html body .working {
+  margin-top: 5vh;
+  height: 45vh;
+  font-family: 'Roboto', sans-serif;
+}
+
+html body .working h2 {
+  padding: 1.8vh;
+  font-family: 'Roboto', sans-serif;
+}
+
+html body .working h3 {
+  color: #686868;
+  font-weight: 500;
+}
+
+html body .working .workingcont {
+  margin: 8vh 5vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+html body .working .workingcont img {
+  height: 1.5vh;
+}
+
+html body .working .workingcont .cards {
+  height: 18vh;
+  width: 18vh;
+  text-align: center;
+  border-radius: 1vw;
+  background-color: #4ebeff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #fff;
+  font-size: 1.5vw;
+  font-weight: 500;
+  -webkit-box-shadow: 1px 1px 10px 1px #5c93fa;
+          box-shadow: 1px 1px 10px 1px #5c93fa;
+}
+
+html body .review {
+  margin-top: 10vh;
+  height: 70vh;
+  padding: 0 1vw;
+  background-color: #d2d2d2;
+  font-family: 'Roboto', sans-serif;
+  position: relative;
+}
+
+html body .review h2 {
+  padding: 2vh;
+  font-family: 'Roboto', sans-serif;
+}
+
+html body .review h3 {
+  color: #686868;
+  font-weight: 500;
+}
+
+html body .review .reviewimg {
+  width: 40vw;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+html body .review .reviewimg img {
+  height: 45vh;
+}
+
+html body .review .reviewimg .buttonreg {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #9462FF;
+  width: 10vw;
+  height: 5vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  cursor: pointer;
+}
+
+html body .review .reviewimg .buttonreg p {
+  font-size: 1.2vw;
+  color: #fff;
+}
+
+html body .review .reviewcards {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 48vh;
+  width: 45vw;
+  position: absolute;
+  right: 1vw;
+  bottom: 1vh;
+  padding: 2vw 2vh;
+}
+
+html body .review .reviewcards .card1 {
+  height: 40vh;
+  width: 15vw;
+  text-align: center;
+  border-radius: 1vw;
+  background-color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #fff;
+  font-size: 1.5vw;
+  font-weight: 500;
+  -webkit-box-shadow: 1px 1px 10px 1px #8d8d8d;
+          box-shadow: 1px 1px 10px 1px #8d8d8d;
+  position: relative;
+}
+
+html body .review .reviewcards .horizontalcards .card2 {
+  margin: 4vh 5vw;
+  margin-top: 0;
+  height: 18vh;
+  width: 15vw;
+  text-align: center;
+  border-radius: 1vw;
+  background-color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #fff;
+  font-size: 1.5vw;
+  font-weight: 500;
+  -webkit-box-shadow: 1px 1px 10px 1px #8d8d8d;
+          box-shadow: 1px 1px 10px 1px #8d8d8d;
+}
+/*# sourceMappingURL=design.css.map */

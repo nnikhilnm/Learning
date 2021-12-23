@@ -1,0 +1,127 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'scss/design.css' %}">
+    <title>Asgnbuddy</title>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>LOGO</h1>
+        </div>
+        <div class="navigation">
+            <ul>
+                <li><a href="">Courses</a></li>
+                <li><a href="">Tutors</a></li>
+                <li class="becometutor"><a href="">Become A Tutor</a></li>
+                <li><a href="{% url 'student:login' %}">Register/Login</a></li>
+            </ul>
+        </div>
+    </header>
+    <div class="hero">
+        <h2 align="center">FACING PROBLEM IN ASSIGNMENS OR  TOPICS ?</h2>
+        <div class="container">
+            
+            <div class="heroinfo" align="left">
+                <h3>GET YOUR PROBLEMS SOLVED<br>BY PROFESSIONAL TUTORS!! </h3>
+                <p>Never loss marks for an <br>assignment now</p>
+                <div class="submitasgn">
+                    <p>Post Assignment<br>Today</p>
+                </div>
+                <div class="heroimg"align="right">
+                    <img src="{% static 'assets/hero.svg' %}" alt="" srcset="">
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="subjects">
+        <h3 align="center">Get assistance in all core subjects and a lot more</h3>
+        <h4 align="center">Our 1-on-1 private tutoring service is built to serve each student differently based on their learning
+            <br>style, needs and current struggles with academics.</h4>
+            <div class="row">
+                <div class="cards">
+                    <a href="" target="_blank" class="linkclass">
+                        <img src="{% static 'assets/math-icon.svg' %}" alt="math">
+                        <p class="name">Math</p>
+                    </a>
+                </div>
+                <div class="cards">
+                    <a href="" target="_blank" class="linkclass">
+                        <img src="{% static 'assets/Science.svg' %}" alt="Science">
+                        <p class="name">Science</p>
+                    </a>
+                </div>
+                <div class="cards">
+                    <a href="" target="_blank" class="linkclass">
+                        <img src="{% static 'assets/Physics.png' %}" alt="Physics">
+                        <p class="name">Physics</p>
+                    </a>
+                </div>
+                <div class="cards">
+                    <a href="" target="_blank" class="linkclass">
+                        <img src="{% static 'assets/Chemistry.svg' %}" alt="Chemistry">
+                        <p class="name">Chemistry</p>
+                    </a>
+                </div>
+                <div class="cards">
+                    <a href="" target="_blank" class="linkclass">
+                        <img src="{% static 'assets/Biology.png' %}" alt="Biology">
+                        <p class="name">Biology</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="working">
+            <h2 align="center">HOW WE MAKE IT EASIER FOR STUDENTS !!</h2>
+            <h3 align="center">We made is much easier and faster for student than ever-before!!</h3>
+            <div class="workingcont">
+                <div class="cards">POST  A
+                    <br>QUESTION</div>
+                <img src="{% static 'assets/Arrow 1.png' %}" alt="" srcset="">
+                <div class="cards">SET<br> 
+                    DEADLINE</div>
+                <img src="{% static 'assets/Arrow 1.png' %}" alt="" srcset="">
+                <div class="cards">CHOOSE<br>
+                    FROM<br>
+                    TUTORS</div>
+                <img src="{% static 'assets/Arrow 1.png' %}" alt="" srcset="">
+                <div class="cards">PAY<br>
+                    AS PER<br>
+                    BID<br>
+                </div>
+                <img src="{% static 'assets/Arrow 1.png' %}" alt="" srcset="">
+                <div class="cards">GET<br>
+                    YOUR<br>
+                    ANSWERS</div>
+            </div>
+        </div>
+        <div class="review">
+            <h2 align="center">WHAT OUR STUDENTS SAY ABOUT US!!</h2>
+            <h3 align="center">Providing best experience to students is what make them love us</h3>
+            <div class="reviewimg">
+                <img src="{% static 'assets/review.svg' %}" alt="" srcset="">
+                <div class="buttonreg" align="center">
+                    <p>REGISTER NOW</p>
+                </div>
+            </div>
+            <div class="reviewcards">
+                <div class="card1">
+
+                </div>
+                <div class="horizontalcards">
+                    <div class="card2">
+
+                    </div>
+                    <div class="card2">
+    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,259 @@
+@import url('https://fonts.googleapis.com/css2?family=Quantico:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+html{
+    
+    body{
+        padding: 0;
+        margin: 0;
+        background-color: #F6F6F6;
+        header{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 5vh;
+            border-bottom: 4px solid #00A0FB;
+            .logo{
+                padding: 0 1vw;
+                font-family: 'Quantico', sans-serif;
+                font-size: 1.5vw;
+            }
+            ul{
+                display: flex;
+                .becometutor{
+                    border-right: 3px solid #00A0FB;
+                }
+                li{
+                    list-style: none;
+                    padding: 0 2vw;
+                    
+                    a{
+                        text-decoration: 0;
+                        font-family: 'Quantico', sans-serif;
+                        color: #000;
+                        
+                    }
+                }
+            }
+        }
+        .hero{
+            height: 70vh;
+            background-color: #D4DEFF;
+            width: 80vw;
+            margin-right: auto;
+            margin-left: auto;
+            padding-top: 0;
+            margin-top: 0;
+            border: 0.5px solid rgb(67, 223, 243);
+            h2{
+                font-size: 2vw;
+                margin:0 0 2vh 0;
+                font-family: 'Quantico', sans-serif;
+            }
+            .container{
+                width: 80vw;
+                .heroinfo{
+                    height: 75vh;
+                    width: 80vw;
+                    position: relative;
+                    h3{
+                        font-family: 'Quantico', sans-serif;
+                        font-size: 1.8vw; 
+                    }
+                    padding: 1vw;
+                    p{
+                        margin-top: 10vh; 
+                        font-family: 'Quantico', sans-serif;
+                        font-size: 1.5vw;
+                    }
+                    .submitasgn{
+                        margin-top: 10vh;
+                        height: 8vh;
+                        width: 12vw;
+                        background-color: #008FF6;
+                        border-radius: 3vw;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        cursor: pointer;
+                        p{
+                            margin: 0;
+                            color: #fff;
+                            font-size: 1.2vw; 
+                        }
+                    }
+                    .heroimg{
+                        position: absolute;
+                        right: 2vw;
+                        bottom: 15vh;
+                        img{
+                            
+                            width: 30vw;
+                        }
+                    }
+                }
+                
+            }    
+        }
+        .subjects{
+            margin-top: 10vh;
+            height: 45vh;
+            background-color: #d2d2d2;
+            font-family: 'Roboto', sans-serif;
+            h3{
+                padding: 2vh;
+                font-family: 'Roboto', sans-serif;
+            }
+            h4{
+                color: rgb(104, 104, 104);
+                font-weight: 500;
+            }
+            .row{
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                .cards{
+                    height: 18vh;
+                    width: 18vh;
+                    border-radius: 1vw;
+                    text-align: center;
+                    background-color: #fff;
+                    display: flex;
+                    justify-content: space-around;
+                    align-items: center;
+                    box-shadow: 2px 2px 10px 5px #888888;
+                    img{
+                        height: 4vw;
+                        width: 4vw;
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+                    .linkclass{
+                      
+                        text-decoration: none;
+                        color: #000;
+                        font-size: 1.2vw;    
+                    }
+                }
+            }    
+        }
+        .working{
+            margin-top: 5vh;
+            height: 45vh;
+            font-family: 'Roboto', sans-serif;
+            
+            h2{
+                padding: 1.8vh;
+                font-family: 'Roboto', sans-serif;
+            }
+            h3{
+                color: rgb(104, 104, 104);
+                font-weight: 500;
+            }
+            .workingcont{
+                margin:8vh 5vh;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                img{
+                    height: 1.5vh;
+                }
+                .cards{
+                    height: 18vh;
+                    width: 18vh;
+                    text-align: center;
+                    border-radius: 1vw;
+                    background-color: rgb(78, 190, 255);
+                    display: flex;
+                    justify-content: space-around;
+                    align-items: center;
+                    color: #fff;
+                    font-size: 1.5vw;
+                    font-weight: 500;
+                    box-shadow: 1px 1px 10px 1px #5c93fa;
+                }
+            }
+        }
+        .review{
+            margin-top: 10vh;
+            height: 70vh;
+            padding: 0 1vw;
+            background-color: #d2d2d2;
+            font-family: 'Roboto', sans-serif;
+            position: relative;
+            h2{
+                padding: 2vh;
+                font-family: 'Roboto', sans-serif;
+            }
+            h3{
+                color: rgb(104, 104, 104);
+                font-weight: 500;
+            }
+            .reviewimg{
+                width: 40vw;
+                align-items: center;
+                img{
+                    height: 45vh;
+                }
+                .buttonreg{
+                    margin-left: auto;
+                    margin-right: auto;
+                    background-color: #9462FF;
+                    width: 10vw;
+                    height: 5vh;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    p{
+                     font-size: 1.2vw;
+                     color: #fff;  
+                    }
+                }
+                
+            }
+            .reviewcards{
+                display: flex;
+                height: 48vh;
+                width: 45vw;
+                position: absolute;
+                right: 1vw;
+                bottom: 1vh;
+                padding: 2vw 2vh;
+                .card1{
+                    height: 40vh;
+                    width: 15vw;
+                    text-align: center;
+                    border-radius: 1vw;
+                    background-color: rgb(255, 255, 255);
+                    display: flex;
+                    justify-content: space-around;
+                    align-items: center;
+                    color: #fff;
+                    font-size: 1.5vw;
+                    font-weight: 500;
+                    box-shadow: 1px 1px 10px 1px #8d8d8d;
+                    position: relative;
+                    
+                }
+                .horizontalcards{
+                    .card2{
+                        margin: 4vh 5vw;
+                        margin-top: 0; 
+                        height: 18vh;
+                        width: 15vw;
+                        text-align: center;
+                        border-radius: 1vw;
+                        background-color: rgb(255, 255, 255);
+                        display: flex;
+                        justify-content: space-around;
+                        align-items: center;
+                        color: #fff;
+                        font-size: 1.5vw;
+                        font-weight: 500;
+                        box-shadow: 1px 1px 10px 1px #8d8d8d;
+                    }
+                }
+            }
+        }
+    }
+}

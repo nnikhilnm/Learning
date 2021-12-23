@@ -9,9 +9,12 @@
 <body>
     <form action="{% url 'student:login' %}" method="POST">
         {% csrf_token %}
-        <input name="username">
-        <input name="email">
-        <input name="password">
+        <input name="username" required>
+        {% if msg|length %}
+        <p>{{msg}}</p>
+        {% endif %}
+        <input name="email" required>
+        <input name="password" required>
         <button type="submit">SUBMIT</button>
     </form>
 </body>
