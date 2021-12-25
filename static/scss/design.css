@@ -41,6 +41,10 @@ html body header ul li {
   padding: 0 2vw;
 }
 
+html body header ul li :hover {
+  text-decoration: underline;
+}
+
 html body header ul li a {
   -webkit-text-decoration: 0;
           text-decoration: 0;
@@ -149,12 +153,16 @@ html body .subjects .row {
           align-items: center;
 }
 
+html body .subjects .row :hover {
+  top: -10px;
+}
+
 html body .subjects .row .cards {
   height: 18vh;
   width: 18vh;
   border-radius: 1vw;
   text-align: center;
-  background-color: #fff;
+  background-color: white;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -165,6 +173,11 @@ html body .subjects .row .cards {
           align-items: center;
   -webkit-box-shadow: 2px 2px 10px 5px #888888;
           box-shadow: 2px 2px 10px 5px #888888;
+  position: relative;
+  cursor: pointer;
+  z-index: 1000000;
+  -webkit-transition: top ease 0.5s;
+  transition: top ease 0.5s;
 }
 
 html body .subjects .row .cards img {
@@ -212,6 +225,10 @@ html body .working .workingcont img {
   height: 1.5vh;
 }
 
+html body .working .workingcont :hover {
+  top: -10px;
+}
+
 html body .working .workingcont .cards {
   height: 18vh;
   width: 18vh;
@@ -231,6 +248,8 @@ html body .working .workingcont .cards {
   font-weight: 500;
   -webkit-box-shadow: 1px 1px 10px 1px #5c93fa;
           box-shadow: 1px 1px 10px 1px #5c93fa;
+  cursor: pointer;
+  position: relative;
 }
 
 html body .review {

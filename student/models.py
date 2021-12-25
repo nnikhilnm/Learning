@@ -10,5 +10,6 @@ class Profile(models.Model):
     fullname = models.CharField(max_length=250, null=True)
     gender = models.CharField(max_length=20, blank=True, null=True)
     photo = models.FileField(null=True, blank=True)
+    is_tutor= models.BooleanField(default=False)
     def __str__(self):
         return str(self.username) + str(' | ') + self.fullname

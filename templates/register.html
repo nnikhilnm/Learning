@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form  method="POST">
+        {% csrf_token %}
+        <input name="First_Name" required>  
+        <label for="c1"> First Name</label><br> 
+        <input name="Last_Name" required> 
+        <label for="c1"> Last Name</label><br> 
+        <input name="username" required>  
+        <label for="c1"> username</label><br> 
+        {% if msg|length %}
+        <p>{{msg}}</p>
+        {% endif %}
+        <input name="email" required> 
+        <label for="c1"> Email</label><br> 
+        <input name="password" required>  
+        <label for="c1"> password</label><br> 
+        <input type="checkbox" id="c1" name="is_tutor" value="True">
+        <label for="c1"> Sign In as Tutor</label><br>      
+        <button type="submit">SUBMIT</button>
+    </form>
+</body>
+</html>

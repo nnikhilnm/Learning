@@ -17,8 +17,12 @@ from django.contrib import admin
 from django.urls import path,include
 from . import views
 
+
 urlpatterns = [
     path('',views.index),
     path('admin/', admin.site.urls),
     path('student/', include('student.urls', namespace='student'), name='student'),
+    path('tutor/create_profile', views.create_profile,name="create_profile"),
+    
+    # path('tutor/login',views.authenticate())
 ]
