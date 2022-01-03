@@ -16,17 +16,18 @@
           </div>
           <div class="row clearfix">
             <div class="">
-              <form>
+              <form method="POST" action="{% url 'student:register' %}" >
+                {% csrf_token %}
                 <div class="row clearfix">
                     <div class="col_half">
                       <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
-                        <input type="text" name="name" placeholder="First Name" />
+                        <input type="text" name="First_name" placeholder="First Name" />
                       </div>
                     </div>
                     <div class="col_half">
                       <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
-                        <input type="text" name="name" placeholder="Last Name" required />
-                      </div>
+                        <input type="text" name="Last_name" placeholder="Last Name" required />
+                      </div>  
                     </div>
                   </div>
                 <div class="input_field"> <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
@@ -39,10 +40,11 @@
                   <input type="password" name="password" placeholder="Password" required />
                 </div>
                 <div class="input_field checkbox_option">
-                    <input type="checkbox" id="cb1">
-                    <label for="cb1">SIGN UP AS TUTOR</label>
+                    <input type="checkbox" id="c1" name="is_tutor" value="True">
+                    <label for="c1">SIGN UP AS TUTOR</label>
                 </div>
-                <input class="button" type="submit" value="Register" />
+                <button type="submit">Submit</button>
+                <input class="button" type="submit">
               </form>
             </div>
           </div>

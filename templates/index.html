@@ -9,6 +9,13 @@
     <title>Asgnbuddy</title>
 </head>
 <body>
+    {% if msg|length%}
+    <p id ="i_abc" style="display :none ">{{msg}}</p>
+    <script>
+        var abc=document.getElementById('i_abc');
+        alert(abc.innerText);
+    </script> 
+    {%endif%}   
     <header>
         <div class="logo">
             <h1>LOGO</h1>

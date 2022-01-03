@@ -14,6 +14,7 @@ def login_user(request):
         u=authenticate(username=user,password=password)
         if u is not None:
             login(request,u)
+            return render(request, "index.html",{'msg':"Login Successfull"})
             # pro
         else:
             msg="Either UserName Or Password Is Wrong"
@@ -22,13 +23,17 @@ def login_user(request):
         return render(request, "login.html")
 
 def register(request):
+    print("sucess"*100)
     if request.method=="POST":
         email= request.POST.get('email')
         username= request.POST.get('username')
-        fname=request.POST.get('First_Name')
-        lname=request.POST.get('Last_Name')
+        fname=request.POST.get('First_name')
+        lname=request.POST.get('Last_name')
+        print("dsfdsfd"*100)
+        print(fname)
         User1= User.objects.all()
         msg=""
+        print("success")
         val=False
         for u in User1:
             print(str(u.username))
