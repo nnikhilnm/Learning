@@ -13,3 +13,12 @@ class Profile(models.Model):
     is_tutor= models.BooleanField(default=False)
     def __str__(self):
         return str(self.username) + str(' | ') + self.fullname
+    
+class Student(models.Model):
+    username = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
+    
+class Tutor(models.Model):
+    username = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
+    Education_status = models.CharField(max_length=250, null=True)
+    Drive_link = models.URLField(max_length=300)
+    Area_of_Expertise = models.CharField(max_length=250, null=True)

@@ -5,4 +5,5 @@ app_name="student"
 urlpatterns = [
     path('login/', views.login_user,name="login"),
     path('register/', views.register,name="register"),
+    path('Forgot_Username/Password/', views.Forgot, name="Forgot"),
 ]
