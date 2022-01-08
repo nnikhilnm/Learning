@@ -40,7 +40,8 @@ class Bid(models.Model):
     tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE, null=True, blank=True)
     project = models.ForeignKey(Question, on_delete=models.CASCADE, null=True, blank=True)
     cost = models.TextField(max_length=50000, null=True)
-    day=models.CharField(max_length=250, null=True)
+    day = models.CharField(max_length=250, null=True)
+    rating= models.IntegerField(blank=True,default=5)
     is_selected=models.BooleanField(default=False)
 
 
