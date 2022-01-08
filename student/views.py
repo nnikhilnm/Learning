@@ -15,13 +15,18 @@ def login_user(request):
         user=request.POST.get('username')
         password=request.POST.get('pass')
         print(user + "  " + password)
-        print(User.objects.get(username="kapilagrawal").password)
         u=authenticate(username=user,password=password)
         print(u)
         if u is not None:
             
             login(request,u)
-            return render(request, "index.html",{'msg':"Login Successfull"})
+            User1=User.objects.get(username=user)
+            print(User1)
+            if Tutor.objects.get(username=User1):
+                return redirect('dashboard')
+                print("SDfsdfgsdfdsg")
+            elif Student.objects.get(username=User1):
+                return render(request, "index.html",{'msg':"Login Successfull"})
             # pro
         else:
             msg="Either UserName Or Password Is Wrong"

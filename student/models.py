@@ -22,3 +22,33 @@ class Tutor(models.Model):
     Education_status = models.CharField(max_length=250, null=True)
     Drive_link = models.URLField(max_length=300)
     Area_of_Expertise = models.CharField(max_length=250, null=True)
+
+class Question(models.Model):
+    id = models.AutoField(primary_key=True)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, null=True, blank=True)
+    # tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE, null=True, blank=True)
+    category=models.CharField(max_length=250, null=True)
+    urgency= models.CharField(max_length=250, null=True)
+    subject=models.CharField(max_length=250, null=True)
+    topic=models.CharField(max_length=250, null=True)
+    def __str__(self):
+        return str(self.category) + str(' | ') + str(self.topic) 
+
+
+class Bid(models.Model):
+    id = models.AutoField(primary_key=True)
+    tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE, null=True, blank=True)
+    project = models.ForeignKey(Question, on_delete=models.CASCADE, null=True, blank=True)
+    cost = models.TextField(max_length=50000, null=True)
+    day=models.CharField(max_length=250, null=True)
+    is_selected=models.BooleanField(default=False)
+
+
+    # priority = models.CharField(max_length=1, choices=PRIOTITIES, null=True, default='10')
+    # PRIOTITIES = (('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5'), ('6', '6'), ('7', '7'), ('8', '8'), ('9', '9'),
+    # ('10', '10'), ('11', '11'), ('12', '12'), ('13', '13'), ('14', '14'), ('15', '15'), ('16', '16'), ('17', '17'),
+    # ('18', '18'), ('19', '19'), ('20', '20'))
+
+    def __str__(self):
+        return str(self.tutor.username) + str(' | ') + str(self.project.id) 
+

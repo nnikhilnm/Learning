@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('student/', include('student.urls', namespace='student'), name='student'),
     path('tutor/create_profile', views.create_profile,name="create_profile"),
+    path('tutor/dashboard', views.dashboard,name="dashboard"),
     
     # path('tutor/login',views.authenticate())
 ]
