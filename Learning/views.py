@@ -11,7 +11,18 @@ def index(request):
     return render(request,"index.html")
 
 def create_profile(request):
-    return render(request, "tutor/create_profile.html",{'user':request.user})
+    if request.method == "POST":
+        edu = request.POST.get("education")
+        link = request.POST.get("proof")
+        area = request.POST.get("area")
+        tutor = Tutor.objects.get(username=request.user)
+        tutor.Education_status=edu
+        tutor.Drive_link=link
+        tutor.Area_of_Expertise=area
+        tutor.save()
+        return redirect('dashboard')
+    else:
+        return render(request, "tutor/create_profile.html",{'user':request.user})
 
 def dashboard(request):
     user=Tutor.objects.get(username=request.user)
