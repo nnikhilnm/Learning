@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     <title>Document</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
-    <link rel="stylesheet" href="project.css">
+    <link rel="stylesheet" href="{% static 'css/project.css' %}">
 </head>
 <body>
     
@@ -22,27 +23,27 @@
         <div class="sidebar-menu">
             <ul>
                 <li>
-                    <a href="index.html">
+                    <a href="{% url 'dashboard'%}">
                         <span class="ti-home"></span>
                         <span>Home</span>
                     </a>
                 </li>
                 
                 <li>
-                    <a href="">
+                    <a href="{% url 'todo_list'%}">
                         <span class="ti-agenda"></span>
-                        <span>To-Do List</span>
+                        <span>To-Do List</span>to-
                     </a>
                 </li>
                 
                 <li>
-                    <a href="">
+                    <a href="{% url 'projects'%}">
                         <span class="ti-folder"></span>
                         <span>Projects</span>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="{% url 'ticket' %}">
                         <span class="ti-settings"></span>
                         <span>Submit a ticker</span>
                     </a>
@@ -112,71 +113,24 @@
                                         <th>Details</th>
                                     </tr>
                                 </thead>
+                                {% for q in question%}
                                 <tbody>
                                     <tr>
                                         <td class="td-team">
                                             <div class="img-1"></div>
-                                            <span>XANG lui</span>
+                                            <span>{{q.student}}</span>
                                         </td>
-                                        <td>App Development</td>
-                                        <td>Development</td>
-                                        <td>22 Aug, 2020</td>
+                                        <td>{{q.topic}}</td>
+                                        <td>{{q.category}}</td>
+                                        <td>{{q.date}}<br>{{q.time}}</td>
                                         
                                         <td>
                                             <span class="badge success">View Details</span>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td class="td-team">
-                                            <div class="img-2"></div>
-                                            <span>XANG lui</span>
-                                        </td>
-                                        <td>Logo Design</td>
-                                        <td>Design</td>
-                                        <td>22 Aug, 2020</td>
-                                        <td>
-                                            <span class=" badge success">View Details</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="td-team">
-                                            <div class="img-3"></div>
-                                            <span>XANG lui</span>
-                                        </td>
-                                        <td>Server setup</td>
-                                        <td>Programming</td>
-                                        <td>22 Aug, 2020</td>
-                                        
-                                        <td>
-                                            <span class="badge success">View Details</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="td-team">
-                                            <div class="img-1"></div>
-                                            <span>XANG lui</span>
-                                        </td>
-                                        <td>Front-end Design</td>
-                                        <td>Design</td>
-                                        <td>22 Aug, 2020</td>
-                                        
-                                        <td>
-                                            <span class=" badge success">View Details</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="td-team">
-                                            <div class="img-2"></div>
-                                            <span>XANG lui</span>
-                                        </td>
-                                        <td>Web Development</td>
-                                        <td>Development</td>
-                                        <td>22 Aug, 2020</td>
-                                        <td>
-                                            <span class="badge success">View Details</span>
-                                        </td>
-                                    </tr>
+                                    
                                 </tbody>
+                                {% endfor %}
                             </table>
                         </div>
                     

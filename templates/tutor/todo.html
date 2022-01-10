@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+    <link rel="stylesheet" href="{% static 'css/todo.css' %}">
+</head>
+<body>
+    
+    <input type="checkbox" id="sidebar-toggle">
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h3 class="brand">
+                <span class="ti-unlink"></span> 
+                <span>AsgnBuddy</span>
+            </h3> 
+            <label for="sidebar-toggle" class="ti-menu-alt"></label>
+        </div>
+        
+        <div class="sidebar-menu">
+            <ul>
+                <li>
+                    <a href="{% url 'dashboard'%}">
+                        <span class="ti-home"></span>
+                        <span>Home</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="{% url 'todo_list'%}">
+                        <span class="ti-agenda"></span>
+                        <span>To-Do List</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="{% url 'projects'%}">
+                        <span class="ti-folder"></span>
+                        <span>Projects</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'ticket' %}">
+                        <span class="ti-settings"></span>
+                        <span>Submit a ticket</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    
+    <div class="main-content">
+        
+        <header>
+            <div class="search-wrapper">
+                <span>Welcome</span>
+            </div>
+            
+            <div class="social-icons">
+                <span class="ti-bell"></span>
+                <span class="ti-comment"></span>
+                <div></div>
+            </div>
+        </header>
+        
+        <main>
+            
+            <h2 class="dash-title">Overview</h2>
+            
+            <div class="dash-cards">
+                <div class="card-single">
+                    <div class="card-body">
+                        <span class="ti-briefcase"></span>
+                        <div>
+                            <h5>On Going Projects</h5>
+                            <h4>3</h4>
+                        </div>
+                    </div>
+                     
+                </div>
+                
+                <div class="card-single">
+                    <div class="card-body">
+                        <span class="ti-agenda"></span>
+                        <div>
+                            <h5>Under Review</h5>
+                            <h4>4</h4>
+                        </div>
+                    </div>
+                     
+                </div>
+                
+                <div class="card-single">
+                    <div class="card-body">
+                        <span class="ti-check-box"></span>
+                        <div>
+                            <h5>Questions Answered</h5>
+                            <h4>143</h4>
+                        </div>
+                    </div>
+                     
+                </div>
+            </div>
+            
+            
+            <section class="recent">
+                <div class="activity-grid">
+                    <div class="activity-card">
+                        <h3>Projects</h3>
+                        
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Project</th>
+                                        <th>Category</th>
+                                        <th>Due Date</th>
+                                        <th>Status</th>
+                                        <th>Details</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        
+                                        <td>App Development</td>
+                                        <td>Development</td>
+                                        <td>22 Aug, 2020</td>
+                                        <td>
+                                            <span class="badge warning">In Progress</span>
+                                        </td>
+                                        <td>
+                                            <span class="badge success">View Details</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        
+                                        <td>Logo Design</td>
+                                        <td>Design</td>
+                                        <td>22 Aug, 2020</td>
+                                        <td>
+                                            <span class="badge deliverd">Deliverd</span>
+                                        </td>
+                                        <td>
+                                            <span class="badge success">View Details</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        
+                                        <td>Server setup</td>
+                                        <td>Programming</td>
+                                        <td>22 Aug, 2020</td>
+                                        <td>
+                                            <span class="badge open">Open</span>
+                                        </td>
+                                        <td>
+                                            <span class="badge success">View Details</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        
+                                        <td>Front-end Design</td>
+                                        <td>Design</td>
+                                        <td>22 Aug, 2020</td>
+                                        <td>
+                                            <span class="badge completed">Completed</span>
+                                        </td>
+                                        <td>
+                                            <span class=" badge success">View Details</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        
+                                        <td>Web Development</td>
+                                        <td>Development</td>
+                                        <td>22 Aug, 2020</td>
+                                        <td>
+                                            <span class="badge dispute">Dispute</span>
+                                        </td>
+
+                                        <td>
+                                            <span class="badge success">View Details</span>
+                                        </td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    
+                    </div>
+                    <div class="summary">
+                        <div class="summary-card">
+                            <div class="summary-single">
+                                <span class="ti-align-justify"></span>
+                                <div>
+                                    <h5>Discription</h5>
+                                    <small>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti magni in ullam suscipit excepturi beatae possimus deserunt iusto recusandae, quos ea, autem repellendus quis magnam perferendis? Nesciunt ut perferendis optio.</small>
+                                </div>
+                            </div>
+                            <div class="summary-single">
+                                <span class="ti-files"></span>
+                                <div>
+                                    <h5>Attached Files</h5>
+                                    <small>link</small>
+                                </div>
+                            </div>
+                            <div class="summary-single">
+                                <span class="ti-money"></span>
+                                <div>
+                                    <h5>Bid</h5>
+                                    15$
+                                    <h5>Message</h5>
+                                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati magni animi voluptatibus eveniet tenetur, aut sunt tempore? Eius debitis autem obcaecati commodi laudantium odit molestias, culpa iure error, impedit suscipit?
+                                    <br>
+                                    <br>
+                                    
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+        </main>
+        
+    </div>
+    
+</body>
+</html>

@@ -45,3 +45,20 @@ def dashboard(request):
         'rating' :rating
     }
     return render(request, "tutor/dashboard.html", context)
+
+def projects(request):
+    question = Question.objects.all()
+    print("<<<<----This is projects part---->>>>")
+    print(question)
+    for q in question:
+        print(q.student)
+    context = {
+        'question' : question,
+    }
+    return render(request, "tutor/projects.html", context)
+
+def todo_list(request):
+    return render(request, "tutor/todo.html")
+
+def ticket(request):
+    return render(request, "tutor/ticket.html")
