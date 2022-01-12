@@ -15,17 +15,21 @@ def login_user(request):
         user=request.POST.get('username')
         password=request.POST.get('pass')
         print(user + "  " + password)
-        u=authenticate(username=user,password=password)
+        u=authenticate(username=str(user),password=str(password))
         print(u)
         if u is not None:
             
             login(request,u)
             User1=User.objects.get(username=user)
             print(User1)
-            if Tutor.objects.get(username=User1):
-                return redirect('dashboard')
+            print("success1")
+            try :
+                t=Tutor.objects.get(username=User1)
                 print("SDfsdfgsdfdsg")
-            elif Student.objects.get(username=User1):
+                return redirect('dashboard')
+                
+            except :
+                s=Student.objects.get(username=User1)
                 return render(request, "index.html",{'msg':"Login Successfull"})
             # pro
         else:
@@ -55,7 +59,7 @@ def register(request):
         
         
         else:
-            user=User.objects.create(username=username,email=email,password=password,first_name=fname,last_name=lname)
+            user=User.objects.create_user(username=username,email=email,password=password,first_name=fname,last_name=lname)
             user.save()
             b= authenticate(user)
             if b is not None:
