@@ -6,6 +6,7 @@ from student.models import *
 from django.core.mail import EmailMessage
 from django.contrib import messages
 from django.conf import settings
+import datetime
 
 def index(request):
     return render(request,"index.html")
@@ -58,7 +59,30 @@ def projects(request):
     return render(request, "tutor/projects.html", context)
 
 def todo_list(request):
-    return render(request, "tutor/todo.html")
+    bid = Bid.objects.all()
+    li = []
+    for b in bid:
+        bd = b.tutor
+        print(b.project.date)
+        
+        print(b.day)
+        print(int(b.day))
+        b.project.date = b.project.date + datetime.timedelta(days=int(b.project.urgency))
+        print(b.project.date)
+        if bd.username == request.user:
+            li.append(b)
+    
+    print(li)
+    context = {
+        'bid' : li
+    }
+    return render(request, "tutor/todo.html",context)
+
 
 def ticket(request):
     return render(request, "tutor/ticket.html")
+
+
+####Login to kar
+# password -1234
+

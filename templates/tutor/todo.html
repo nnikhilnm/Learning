@@ -117,66 +117,20 @@
                                 <thead>
                                     <tr>
                                         <th>Project</th>
-                                        <th>Category</th>
+                                        <th>Student</th>
                                         <th>Due Date</th>
                                         <th>Status</th>
                                         <th>Details</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    
+                                {% for b in bid%}
                                     <tr>
                                         
-                                        <td>App Development</td>
-                                        <td>Development</td>
-                                        <td>22 Aug, 2020</td>
-                                        <td>
-                                            <span class="badge warning">In Progress</span>
-                                        </td>
-                                        <td>
-                                            <span class="badge success">View Details</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        
-                                        <td>Logo Design</td>
-                                        <td>Design</td>
-                                        <td>22 Aug, 2020</td>
-                                        <td>
-                                            <span class="badge deliverd">Deliverd</span>
-                                        </td>
-                                        <td>
-                                            <span class="badge success">View Details</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        
-                                        <td>Server setup</td>
-                                        <td>Programming</td>
-                                        <td>22 Aug, 2020</td>
-                                        <td>
-                                            <span class="badge open">Open</span>
-                                        </td>
-                                        <td>
-                                            <span class="badge success">View Details</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        
-                                        <td>Front-end Design</td>
-                                        <td>Design</td>
-                                        <td>22 Aug, 2020</td>
-                                        <td>
-                                            <span class="badge completed">Completed</span>
-                                        </td>
-                                        <td>
-                                            <span class=" badge success">View Details</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        
-                                        <td>Web Development</td>
-                                        <td>Development</td>
-                                        <td>22 Aug, 2020</td>
+                                        <td>{{b.project}}</td>
+                                        <td>{{b.project.student|capfirst}}</td>
+                                        <td>{{b.project.date}}</td>
                                         <td>
                                             <span class="badge dispute">Dispute</span>
                                         </td>
@@ -185,7 +139,7 @@
                                             <span class="badge success">View Details</span>
                                         </td>
                                     </tr>
-                                    
+                                {% endfor %} 
                                 </tbody>
                             </table>
                         </div>
