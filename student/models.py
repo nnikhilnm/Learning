@@ -2,22 +2,24 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import User
 # Create your models here.
+COLOR_STATUS = (
+    ('Open','Open'),
+    ('Progress', 'Progress'),
+    ('Delivered','Delivered'),
+    ('Completed','Completed'),
+    ('Dispute','Dispute')
+)
 
 
-
-class Profile(models.Model):
+class Student(models.Model):
     username = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     fullname = models.CharField(max_length=250, null=True)
     gender = models.CharField(max_length=20, blank=True, null=True)
     photo = models.FileField(null=True, blank=True)
+    avtar=models.CharField(max_length=260,blank=True)
     is_tutor= models.BooleanField(default=False)
     def __str__(self):
         return str(self.username) + str(' | ') + self.fullname
-    
-class Student(models.Model):
-    username = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
-    def __str__(self):
-        return str(self.username)
     
 class Tutor(models.Model):
     username = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
@@ -39,6 +41,7 @@ class Question(models.Model):
     topic=models.CharField(max_length=250, null=True)
     date = models.DateField()
     time = models.TimeField()
+
     def __str__(self):
         return str(self.category) + str(' | ') + str(self.topic) 
 
@@ -50,8 +53,7 @@ class Bid(models.Model):
     cost = models.TextField(max_length=50000, null=True)
     day = models.CharField(max_length=250, null=True)
     rating= models.IntegerField(blank=True,default=5)
-    is_selected=models.BooleanField(default=False)
-
+    status = models.CharField(max_length=30, choices=COLOR_STATUS, default='Open')
 
     # priority = models.CharField(max_length=1, choices=PRIOTITIES, null=True, default='10')
     # PRIOTITIES = (('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5'), ('6', '6'), ('7', '7'), ('8', '8'), ('9', '9'),
@@ -61,3 +63,10 @@ class Bid(models.Model):
     def __str__(self):
         return str(self.tutor.username) + str(' | ') + str(self.project.id) 
 
+class Ticket(models.Model):
+    question_id = models.CharField(max_length=250, null=True)
+    tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE, null=True, blank=True)
+    description = models.CharField(max_length=250, null=True)
+    
+    def _str_(self):
+        return str(self.tutor.username) + str(' | ') + str(self.question_id)

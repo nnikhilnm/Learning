@@ -113,13 +113,14 @@
                     <div class="card-single">
                         <div class="card-body">
                             <span class="ti-pencil-alt"></span>
-                            <div class="ticketcard">
-                                <input type="text" placeholder="Question ID" class="quesid">
+                            <form class="ticketcard" action="{% url 'ticket' %}" method="POST">
+                                {% csrf_token %}
+                                <input type="text" name="question-id" placeholder="Question ID" class="quesid">
                                 <br>
                                 <br>
-                                <textarea type="text" placeholder="Discription" class="description"> </textarea><br>
-                                <button> Submit </button>
-                            </div>
+                                <textarea type="text" placeholder="Discription" name="discription" class="description"> </textarea><br>
+                                <button type="submit"> Submit </button>
+                            </form>
                         </div>
                          
                     </div>

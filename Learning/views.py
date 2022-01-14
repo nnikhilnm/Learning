@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.conf import settings
 import datetime
 
+
 def index(request):
     return render(request,"index.html")
 
@@ -80,8 +81,15 @@ def todo_list(request):
 
 
 def ticket(request):
+    if request.method == "POST":
+        ques_id = request.POST.get("question-id")
+        description = request.POST.get("discription")
+        print(ques_id)
+        print(description)
+        ticket = Ticket.objects.create(question_id=str(ques_id),tutor=Tutor.objects.get(username=request.user),description=description)
+        print(ticket)
+        ticket.save()
     return render(request, "tutor/ticket.html")
-
 
 ####Login to kar
 # password -1234

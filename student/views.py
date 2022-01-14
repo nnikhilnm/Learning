@@ -74,7 +74,7 @@ def register(request):
                     student = Student.objects.create(username=user)
                     student.save()
                     print(user.username)
-                    return render(request, "profile.html",{'user':request.user})
+                    return redirect('student:createprofile')
     else:
         return render(request, "register.html")
 
@@ -95,3 +95,16 @@ def Forgot(request):
     else:
         return render(request, "Password.html")
   
+def createprofile(request):
+    if request.method=="POST":
+        try:
+            student = Student.objects.get(username=request.user)
+            student.gender=request.POST.get('gender')
+            student.fullname=User.objects.get(username=request.user).first_name+" "+User.objects.get(username=request.user).last_name
+            student.avtar="https://avatars.dicebear.com/api/"+str(request.POST.get('gender'))+'/'+User.objects.get(username=request.user).first_name+".svg"
+            student.save()
+            return redirect('')
+        except:
+            return redirect('student:login')
+    else:        
+        return render(request,'student/createprofile.html')
