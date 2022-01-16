@@ -7,19 +7,20 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
     <link rel="stylesheet" href="{% static 'css/project.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 </head>
 <body>
-    
+
     <input type="checkbox" id="sidebar-toggle">
     <div class="sidebar">
         <div class="sidebar-header">
             <h3 class="brand">
-                <span class="ti-unlink"></span> 
+                <span class="ti-unlink"></span>
                 <span>AsgnBuddy</span>
-            </h3> 
+            </h3>
             <label for="sidebar-toggle" class="ti-menu-alt"></label>
         </div>
-        
+
         <div class="sidebar-menu">
             <ul>
                 <li>
@@ -28,14 +29,14 @@
                         <span>Home</span>
                     </a>
                 </li>
-                
+
                 <li>
                     <a href="{% url 'todo_list'%}">
                         <span class="ti-agenda"></span>
-                        <span>To-Do List</span>to-
+                        <span>To-Do List</span>
                     </a>
                 </li>
-                
+
                 <li>
                     <a href="{% url 'projects'%}">
                         <span class="ti-folder"></span>
@@ -51,26 +52,26 @@
             </ul>
         </div>
     </div>
-    
-    
+
+
     <div class="main-content">
-        
+
         <header>
             <div class="search-wrapper">
                 <span>Welcome</span>
             </div>
-            
+
             <div class="social-icons">
                 <span class="ti-bell"></span>
                 <span class="ti-comment"></span>
                 <div></div>
             </div>
         </header>
-        
+
         <main>
-            
+
             <h2 class="dash-title">Overview</h2>
-            
+
             <div class="dash-cards">
                 <div class="card-single">
                     <div class="card-body">
@@ -80,10 +81,10 @@
                             <h4>3</h4>
                         </div>
                     </div>
-                     
+
                 </div>
-                
-                
+
+
                 <div class="card-single">
                     <div class="card-body">
                         <span class="ti-check-box"></span>
@@ -92,16 +93,16 @@
                             <h4>143</h4>
                         </div>
                     </div>
-                     
+
                 </div>
             </div>
-            
-            
+
+
             <section class="recent">
                 <div class="activity-grid">
                     <div class="activity-card">
                         <h3>Projects</h3>
-                        
+
                         <div class="table-responsive">
                             <table>
                                 <thead>
@@ -115,7 +116,7 @@
                                 </thead>
                                 {% for q in question%}
                                 <tbody>
-                                    <tr>
+                                    <tr class="project1">
                                         <td class="td-team">
                                             <div class="img-1"></div>
                                             <span>{{q.student}}</span>
@@ -123,17 +124,19 @@
                                         <td>{{q.topic}}</td>
                                         <td>{{q.category}}</td>
                                         <td>{{q.date}}<br>{{q.time}}</td>
-                                        
+
                                         <td>
-                                            <span class="badge success">View Details</span>
+                                            <button class="btnSelect" id="badge" style="border:none; padding: .2rem 1rem; border-radius: 20px;font-weight: 700;font-size: .7rem;background: #DEF7EC;color: var(--main-color); cursor: pointer;">View Details</button>
                                         </td>
+                                        <td style="visibility: hidden;" id="discription">{{q.discription}}</td>
+                                        <td style="visibility: hidden;" id="links">{{q.links}}</td>
                                     </tr>
-                                    
+
                                 </tbody>
                                 {% endfor %}
                             </table>
                         </div>
-                    
+
                     </div>
                     <div class="summary">
                         <div class="summary-card">
@@ -141,14 +144,14 @@
                                 <span class="ti-align-justify"></span>
                                 <div>
                                     <h5>Discription</h5>
-                                    <small>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti magni in ullam suscipit excepturi beatae possimus deserunt iusto recusandae, quos ea, autem repellendus quis magnam perferendis? Nesciunt ut perferendis optio.</small>
+                                    <small class="prodis" id="prodisc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti magni in ullam suscipit excepturi beatae possimus deserunt iusto recusandae, quos ea, autem repellendus quis magnam perferendis? Nesciunt ut perferendis optio.</small>
                                 </div>
                             </div>
                             <div class="summary-single">
                                 <span class="ti-files"></span>
                                 <div>
                                     <h5>Attached Files</h5>
-                                    <small>link</small>
+                                    <small id="prolinks">link</small>
                                 </div>
                             </div>
                             <div class="summary-single">
@@ -172,10 +175,24 @@
                     </div>
                 </div>
             </section>
-            
+
         </main>
-        
+
     </div>
-    
+     <!-- <script src="projects.js"></script>    -->
+     <script>
+        $(document).ready(function(){
+            // code to read selected table row cell data (values).
+            $(".btnSelect").on('click',function(){
+                 var currentRow=$(this).closest("tr");
+                 var col1=currentRow.find("td:eq(5)").html();
+                 var col2=currentRow.find("td:eq(6)").html();
+                 var data=col1+"\n"+col2;
+                 document.getElementById("prodisc").innerHTML = col1;
+                 document.getElementById("prolinks").innerHTML = col2;
+
+            });
+        });
+        </script>
 </body>
 </html>
