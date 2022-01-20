@@ -237,17 +237,21 @@ tbody tr:nth-child(even) {
     background: #f9fafc;
 }
 
-.badge {
+.btnSelect {
     padding: .2rem 1rem;
     border-radius: 20px;
     font-weight: 700;
     font-size: .7rem;
-}
-
-.badge.success {
     background: #DEF7EC;
     color: var(--main-color);
     cursor: pointer;
+}
+
+#discription{
+    width: 0;
+}
+#links{
+    width: 0;
 }
 
 .badge.warning {

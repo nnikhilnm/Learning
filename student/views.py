@@ -47,15 +47,21 @@ def register(request):
 
         User1= User.objects.all()
         msg=""
-        val=False
+        val=1
         for u in User1:
             print(str(u.username))
             if str(u.username)==username:
-                val=True
+                val=2
+            elif str(u.email)==email:
+                val=3
+            if val==2 or val==3:
                 break
+            
         password=request.POST.get('password')
-        if val:
+        if val==2:
             return render(request, "register.html",{'msg':"Username Already Exist!!"})
+        elif val==3:
+            return render(request, "register.html",{'msg':"Email Already Exist!!"})
         
         
         else:
