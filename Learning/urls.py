@@ -27,7 +27,10 @@ urlpatterns = [
     path('tutor/Projects', views.projects,name="projects"),
     path('tutor/todo_list', views.todo_list,name="todo_list"),
     path('tutor/ticket', views.ticket,name="ticket"),
-    
+    path('student/dashboard', views.stu_dashboard,name="stu_dashboard"),
+    path('student/Post_question', views.Post_question,name="postquestion"),
+    path('student/ticket', views.stu_ticket,name="stu_ticket"),
+    path('student/bid', views.stu_bid,name="stu_bid"),
     
     # path('tutor/login',views.authenticate())
 ]

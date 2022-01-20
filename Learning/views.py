@@ -6,7 +6,7 @@ from student.models import *
 from django.core.mail import EmailMessage
 from django.contrib import messages
 from django.conf import settings
-import datetime
+import datetime 
 
 
 def index(request):
@@ -94,3 +94,30 @@ def ticket(request):
 ####Login to kar
 # password -1234
 
+def stu_dashboard(request):
+    user = User.objects.get(username = request.user)
+    stu = Student.objects.get(username=user)
+    question = Question.objects.filter(student=stu)
+    context = {
+        'name': request.user,
+        'question' : question
+    }
+    return render(request, "student/index.html", context)
+
+def Post_question(request):
+    context = {
+        'name': request.user
+    }
+    return render(request, "student/postquestion.html", context)
+
+def stu_ticket(request):
+    context = {
+        'name': request.user
+    }
+    return render(request, 'student/ticket.html', context)
+
+def stu_bid(request):
+    context = {
+        'name': request.user
+    }
+    return render(request, 'student/bid.html', context)

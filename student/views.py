@@ -30,7 +30,7 @@ def login_user(request):
                 
             except :
                 s=Student.objects.get(username=User1)
-                return render(request, "index.html",{'msg':"Login Successfull"})
+                return redirect("stu_dashboard")
             # pro
         else:
             msg="Either UserName Or Password Is Wrong"

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+    <link rel="stylesheet" href="{% static 'css/bid.css' %}">
+</head>
+<body>
+    
+    <input type="checkbox" id="sidebar-toggle">
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h3 class="brand">
+                <span class="ti-unlink"></span> 
+                <span>AsgnBuddy</span>
+            </h3> 
+            <label for="sidebar-toggle" class="ti-menu-alt"></label>
+        </div>
+        
+        <div class="sidebar-menu">
+            <ul>
+                <li>
+                    <a href="{% url 'stu_dashboard' %}">
+                        <span class="ti-home"></span>
+                        <span>Home</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="{% url 'postquestion' %}">
+                        <span class="ti-agenda"></span>
+                        <span>Post A Question</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="{% url 'stu_bid' %}">
+                        <span class="ti-folder"></span>
+                        <span>My Orders</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'stu_ticket' %}">
+                        <span class="ti-settings"></span>
+                        <span>Submit a ticket</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    
+    <div class="main-content">
+        
+        <header>
+            <div class="search-wrapper">
+                <span>Welcome {{name}}</span>
+            </div>
+            
+            <div class="social-icons">
+                <span class="ti-bell"></span>
+                <span class="ti-comment"></span>
+                <div></div>
+            </div>
+        </header>
+        
+        <main>
+            
+            <h2 class="dash-title">Overview</h2>
+            
+            <div class="dash-cards">
+                <div class="card-single">
+                    <div class="card-body">
+                        <span class="ti-briefcase"></span>
+                        <div>
+                            <h5>Question Title</h5>
+                            <h4>5</h4>
+                        </div>
+                    </div>
+                     
+                </div>
+                
+                <div class="card-single">
+                    <div class="card-body">
+                        <span class="ti-check-box"></span>
+                        <div>
+                            <h5>Start Date</h5>
+                            <h4>3</h4>
+                        </div>
+                    </div>
+                     
+                </div>
+                
+               
+                <div class="card-single">
+                    <div class="card-body">
+                        <span class="ti-blackboard"></span>
+                        <div>
+                            <h5>Urgency</h5>
+                            <h4>3</h4>
+                        </div>
+                    </div>
+                     
+                </div>
+            </div>
+            
+            <br>
+            <div class="dash-cards2">
+                
+                <div class="card-single">
+                    <div class="card-body">
+                        <span class="ti-check-box"></span>
+                        <div>
+                            <h5>Discription</h5>
+                            <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi voluptate maiores doloremque eaque labore, necessitatibus cupiditate quasi hic distinctio quo illo molestiae totam vel magni laboriosam ipsum, officia, ipsa eum aliquid? Reiciendis beatae labore esse dolorem ad odit quos saepe minima sint. Deleniti inventore, dignissimos pariatur nemo quisquam quod! Atque!</h4>
+                        </div>
+                    </div>
+                     
+                </div>
+                
+               
+                <div class="card-single">
+                    <div class="card-body">
+                        <span class="ti-blackboard"></span>
+                        <div>
+                            <h5>Attached Files</h5>
+                            <h4>Link</h4>
+                        </div>
+                    </div>
+                     
+                </div>
+            </div>
+            <section class="recent">
+                <div class="activity-grid">
+                    <div class="activity-card">
+                        <h3>Recent Posted Questions</h3>
+                        
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Tutor</th>
+                                        <th>Message</th>
+                                        <th>Bid</th>
+                                        <th>Approve</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>App Development</td>
+                                        <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde sapiente aliquid reiciendis libero eveniet. Odio temporibus repellat repellendus, suscipit minima esse ratione perspiciatis non voluptas! Quis iure quos vel similique et deleniti deserunt nulla voluptatum possimus? Ea voluptas earum ipsa suscipit, beatae obcaecati error! Facere error deserunt corrupti nulla aut!</td>
+                                        <td>5$</td>
+                                        
+                                        <td>
+                                            <span class="badge success">Approve</span>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Logo Design</td>
+                                        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, numquam ab? Qui vitae suscipit delectus beatae consequuntur magnam nemo totam dolorum molestiae, quidem odio itaque, natus fugit animi provident cupiditate!</td>
+                                        <td>50$</td>
+                                        <td>
+                                            <span class="badge success">Approve</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Server setup</td>
+                                        <td>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem odio reiciendis repudiandae deleniti placeat minus possimus consequuntur nihil quae sequi architecto ea dignissimos fuga sapiente, nesciunt doloremque asperiores amet est eius atque labore? Laborum distinctio accusamus mollitia unde vitae fugit labore numquam deserunt nemo cupiditate.</td>
+                                        
+                                        <td>25$</td>
+                                        <td>
+                                            <span class="badge success">Approve</span>
+                                        </td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    </div>
+                </div>
+            </section>
+            
+        </main>
+        
+    </div>
+    
+</body>
+</html>

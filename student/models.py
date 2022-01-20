@@ -10,6 +10,17 @@ COLOR_STATUS = (
     ('Dispute','Dispute')
 )
 
+categotry = {
+    # ('Economics','Economics'),
+    # ('Finance','Finance'),
+    ('Maths','Maths'),
+    ('Science','Science'),
+    # ('Chemistry','Chemistry'),
+    # ('General Science','General Science'),
+    ('Programming','Programming'),
+    ('others','others'),
+}
+
 
 class Student(models.Model):
     username = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
@@ -35,7 +46,7 @@ class Question(models.Model):
     id = models.AutoField(primary_key=True)
     student = models.ForeignKey(Student, on_delete=models.CASCADE, null=True, blank=True)
     # tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE, null=True, blank=True)
-    category=models.CharField(max_length=250, null=True)
+    category = models.CharField(max_length=30, default='Open')
     urgency= models.CharField(max_length=250, null=True)
     subject=models.CharField(max_length=250, null=True)
     topic=models.CharField(max_length=250, null=True)
@@ -43,7 +54,7 @@ class Question(models.Model):
     time = models.TimeField()
 
     def __str__(self):
-        return str(self.category) + str(' | ') + str(self.topic) 
+        return str(self.category) + str(' | ') + str(self.topic)
 
 
 class Bid(models.Model):
@@ -70,3 +81,4 @@ class Ticket(models.Model):
     
     def _str_(self):
         return str(self.tutor.username) + str(' | ') + str(self.question_id)
+    
