@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import User
+import uuid
+
 # Create your models here.
 COLOR_STATUS = (
     ('Open','Open'),
@@ -45,11 +47,12 @@ class Tutor(models.Model):
 class Question(models.Model):
     id = models.AutoField(primary_key=True)
     student = models.ForeignKey(Student, on_delete=models.CASCADE, null=True, blank=True)
+    randomly_generated_id = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
     # tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE, null=True, blank=True)
-    category = models.CharField(max_length=30, default='Open')
+    category = models.CharField(max_length=30, choices=categotry ,default='Open')
     urgency= models.CharField(max_length=250, null=True)
-    subject=models.CharField(max_length=250, null=True)
-    topic=models.CharField(max_length=250, null=True)
+    description=models.CharField(max_length=250, null=True)
+    upload = models.FileField(upload_to ='uploads/% Y/% m/% d/', null=True)
     date = models.DateField()
     time = models.TimeField()
 

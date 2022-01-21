@@ -118,12 +118,12 @@
                         
                         
                             <div class="questionform">
-                                <form action="">
+                                <form method="POST" action="{% url 'postquestion' %}">
                                     <div class="main-container">
                                         <h2>Select Category</h2>
                                         <div class="radio-buttons">
                                           <label class="custom-radio">
-                                            <input type="radio" name="radio" checked />
+                                            <input type="radio" name="radio" value="Science" checked />
                                             <span class="radio-btn"
                                               ><i class="las la-check"></i>
                                               <div class="hobbies-icon">
@@ -133,7 +133,7 @@
                                             </span>
                                           </label>
                                           <label class="custom-radio">
-                                            <input type="radio" name="radio" />
+                                            <input type="radio" name="radio" value="Maths" />
                                             <span class="radio-btn"
                                               ><i class="las la-check"></i>
                                               <div class="hobbies-icon">
@@ -143,7 +143,7 @@
                                             </span>
                                           </label>
                                           <label class="custom-radio">
-                                            <input type="radio" name="radio" />
+                                            <input type="radio" name="radio" value="Programming" />
                                             <span class="radio-btn"
                                               ><i class="las la-check"></i>
                                               <div class="hobbies-icon">
@@ -153,19 +153,19 @@
                                             </span>
                                           </label>
                                           <label class="custom-radio">
-                                            <input type="radio" name="radio" />
+                                            <input type="radio" name="radio" value="others" />
                                             <span class="radio-btn"
                                               ><i class="las la-check"></i>
                                               <div class="hobbies-icon">
                                                 <i class="las la-globe-americas"></i>
-                                                <h3>Other</h3>
+                                                <h3>others</h3>
                                               </div>
                                             </span>
                                           </label>
                                           <h2>Discription</h2>
-                                          <textarea name="" id="discrip" ></textarea>
+                                          <textarea name="description" id="discrip" ></textarea>
                                           <h2>Urgency</h2>
-                                          <input type="text" value="" placeholder="Mention Day and Hours" style="margin: 0 0  1vh 0;">
+                                          <input type="text" name="urgency" placeholder="Mention Day and Hours" style="margin: 0 0  1vh 0;">
                                           <h2>Upload Necesary Files</h2>
                                           <div class="drop-zone">
                                             <span class="drop-zone__prompt">Drop file here or click to upload<br>(Zip all Files and upload)</span>
