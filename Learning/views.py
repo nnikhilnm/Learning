@@ -1,3 +1,4 @@
+import re
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate ,login ,logout
@@ -105,10 +106,34 @@ def stu_dashboard(request):
     return render(request, "student/index.html", context)
 
 def Post_question(request):
-    context = {
-        'name': request.user
-    }
-    return render(request, "student/postquestion.html", context)
+    if request.method == 'POST':
+        cat = request.POST.get('radio')
+        print(cat)
+        
+        date = datetime.date.today()
+        print(date)
+        current_time = datetime.datetime.now()
+        time = current_time.strftime("%H:%M:%S")
+        print(time)
+        
+        description = request.POST.get('description')
+        urgency = request.POST.get('urgency')
+        zip = request.POST.get('myFile')
+        print(zip)
+        user = User.objects.get(username = request.user)
+        stu = Student.objects.get(username=user)
+        
+        que = Question.objects.create(student=stu,category=cat,urgency=urgency,description=description,upload=zip,date=date,time=time)
+        que.save()
+        context = {
+            'name': request.user
+        }
+        return render(request, "student/postquestion.html", context)
+    else:
+        context = {
+            'name': request.user
+        }
+        return render(request, "student/postquestion.html", context)
 
 def stu_ticket(request):
     context = {

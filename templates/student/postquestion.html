@@ -119,6 +119,7 @@
                         
                             <div class="questionform">
                                 <form method="POST" action="{% url 'postquestion' %}">
+                                  {% csrf_token %}
                                     <div class="main-container">
                                         <h2>Select Category</h2>
                                         <div class="radio-buttons">
@@ -171,7 +172,7 @@
                                             <span class="drop-zone__prompt">Drop file here or click to upload<br>(Zip all Files and upload)</span>
                                             <input type="file" name="myFile" class="drop-zone__input">
                                           </div>
-                                          <button type="button" class="sub_btn" >Submit</button>
+                                          <button type="submit" class="sub_btn" >Submit</button>
                                         </div>
                                       </div> 
                                 </form>

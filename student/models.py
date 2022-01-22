@@ -13,12 +13,8 @@ COLOR_STATUS = (
 )
 
 categotry = {
-    # ('Economics','Economics'),
-    # ('Finance','Finance'),
     ('Maths','Maths'),
     ('Science','Science'),
-    # ('Chemistry','Chemistry'),
-    # ('General Science','General Science'),
     ('Programming','Programming'),
     ('others','others'),
 }
@@ -52,12 +48,12 @@ class Question(models.Model):
     category = models.CharField(max_length=30, choices=categotry ,default='Open')
     urgency= models.CharField(max_length=250, null=True)
     description=models.CharField(max_length=250, null=True)
-    upload = models.FileField(upload_to ='uploads/% Y/% m/% d/', null=True)
+    upload = models.FileField(upload_to ='static/media/', null=True)
     date = models.DateField()
     time = models.TimeField()
 
     def __str__(self):
-        return str(self.category) + str(' | ') + str(self.topic)
+        return str(self.category)
 
 
 class Bid(models.Model):
