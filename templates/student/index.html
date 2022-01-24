@@ -36,12 +36,12 @@
                     </a>
                 </li>
                 
-                <li>
+                {% comment %} <li>
                     <a href="{% url 'stu_bid' %}">
                         <span class="ti-folder"></span>
                         <span>My Orders</span>
                     </a>
-                </li>
+                </li> {% endcomment %}
                 <li>
                     <a href="{% url 'stu_ticket' %}">
                         <span class="ti-settings"></span>
@@ -130,10 +130,12 @@
                                         <td>{{q.category}}</td>
                                         <td>{{q.description}}</td>
                                         <td>{{q.date}}<br>{{q.time}}</td>
-                                        <td>{{q.urgency}}</td>
+                                        <td><a type="download" href="{{q.upload}}">{{q.upload}}</a></td>
                                         
                                         <td>
-                                            <a href="bid.html" class="badge success">Bids</a>
+                                            <a href="/student/{{q.id}}"><button id="{{q.id}}" class="badge success">Bids</button></a>
+                                            {% comment %} <a href="{% url 'stu_bid' q.id %}" data-id="{{q.id}}" id="{{q.id}}" class="badge success">Bids</a> {% endcomment %}
+                                            
                                         </td>
 
                                     </tr>

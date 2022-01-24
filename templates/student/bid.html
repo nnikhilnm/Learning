@@ -36,12 +36,12 @@
                     </a>
                 </li>
                 
-                <li>
+                {% comment %} <li>
                     <a href="{% url 'stu_bid' %}">
                         <span class="ti-folder"></span>
                         <span>My Orders</span>
                     </a>
-                </li>
+                </li> {% endcomment %}
                 <li>
                     <a href="{% url 'stu_ticket' %}">
                         <span class="ti-settings"></span>
@@ -115,7 +115,7 @@
                         <span class="ti-check-box"></span>
                         <div>
                             <h5>Discription</h5>
-                            <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi voluptate maiores doloremque eaque labore, necessitatibus cupiditate quasi hic distinctio quo illo molestiae totam vel magni laboriosam ipsum, officia, ipsa eum aliquid? Reiciendis beatae labore esse dolorem ad odit quos saepe minima sint. Deleniti inventore, dignissimos pariatur nemo quisquam quod! Atque!</h4>
+                            <h4>{{bid.0.project.description}}</h4>
                         </div>
                     </div>
                      
@@ -127,7 +127,7 @@
                         <span class="ti-blackboard"></span>
                         <div>
                             <h5>Attached Files</h5>
-                            <h4>Link</h4>
+                            <h4><a href="">Link</a></h4>
                         </div>
                     </div>
                      
@@ -149,33 +149,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {% for b in bid %}
                                     <tr>
-                                        <td>App Development</td>
-                                        <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde sapiente aliquid reiciendis libero eveniet. Odio temporibus repellat repellendus, suscipit minima esse ratione perspiciatis non voluptas! Quis iure quos vel similique et deleniti deserunt nulla voluptatum possimus? Ea voluptas earum ipsa suscipit, beatae obcaecati error! Facere error deserunt corrupti nulla aut!</td>
-                                        <td>5$</td>
+                                        <td>{{b.tutor.Area_of_Expertise}}</td>
+                                        <td>{{b.description}}</td>
+                                        <td>{{b.cost}}$</td>
                                         
                                         <td>
                                             <span class="badge success">Approve</span>
                                         </td>
 
                                     </tr>
-                                    <tr>
-                                        <td>Logo Design</td>
-                                        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, numquam ab? Qui vitae suscipit delectus beatae consequuntur magnam nemo totam dolorum molestiae, quidem odio itaque, natus fugit animi provident cupiditate!</td>
-                                        <td>50$</td>
-                                        <td>
-                                            <span class="badge success">Approve</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Server setup</td>
-                                        <td>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem odio reiciendis repudiandae deleniti placeat minus possimus consequuntur nihil quae sequi architecto ea dignissimos fuga sapiente, nesciunt doloremque asperiores amet est eius atque labore? Laborum distinctio accusamus mollitia unde vitae fugit labore numquam deserunt nemo cupiditate.</td>
-                                        
-                                        <td>25$</td>
-                                        <td>
-                                            <span class="badge success">Approve</span>
-                                        </td>
-                                    </tr>
+                                    {% endfor %}
                                     
                                 </tbody>
                             </table>

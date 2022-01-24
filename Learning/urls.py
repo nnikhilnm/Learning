@@ -30,7 +30,9 @@ urlpatterns = [
     path('student/dashboard', views.stu_dashboard,name="stu_dashboard"),
     path('student/Post_question', views.Post_question,name="postquestion"),
     path('student/ticket', views.stu_ticket,name="stu_ticket"),
-    path('student/bid', views.stu_bid,name="stu_bid"),
+    # path('student/bid', views.stu_bid,name="stu_bid"),
+    # path('student/(?P<bid_id>[0-9]*)', views.stu_bid, name = "stu_bid"),
+    path("student/<int:myid>", views.stu_bid, name='stu_bid'),
     
     # path('tutor/login',views.authenticate())
 ]

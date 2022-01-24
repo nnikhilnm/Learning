@@ -141,8 +141,13 @@ def stu_ticket(request):
     }
     return render(request, 'student/ticket.html', context)
 
-def stu_bid(request):
+def stu_bid(request, myid):
+    que = Question.objects.get(id=myid)
+    print(myid)
+    bid = Bid.objects.filter(project=que)
+    print(bid)
     context = {
-        'name': request.user
+        'name': request.user,
+        'bid' : bid
     }
     return render(request, 'student/bid.html', context)
