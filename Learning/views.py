@@ -101,7 +101,7 @@ def stu_dashboard(request):
     question = Question.objects.filter(student=stu)
     context = {
         'name': request.user,
-        'question' : question
+        'question' : question,
     }
     return render(request, "student/index.html", context)
 
@@ -151,3 +151,6 @@ def stu_bid(request, myid):
         'bid' : bid
     }
     return render(request, 'student/bid.html', context)
+
+def create_bid(request):
+    pass

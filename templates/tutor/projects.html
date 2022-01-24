@@ -108,28 +108,31 @@
                                 <thead>
                                     <tr>
                                         <th>Student</th>
-                                        <th>Project</th>
+                                        <th>Question ID</th>
                                         <th>Category</th>
                                         <th>Due Date</th>
                                         <th>Details</th>
                                     </tr>
                                 </thead>
-                                {% for q in question%}
+                                {% for q in question    %}
                                 <tbody>
                                     <tr class="project1">
                                         <td class="td-team">
                                             <div class="img-1"></div>
-                                            <span>{{q.student}}</span>
+                                            <span>{{q.student.username}}</span>
                                         </td>
-                                        <td>{{q.topic}}</td>
+                                        <td>{{q.randomly_generated_id}}</td>
                                         <td>{{q.category}}</td>
                                         <td>{{q.date}}<br>{{q.time}}</td>
+                                        
 
                                         <td>
-                                            <button class="btnSelect" id="badge" style="border:none; padding: .2rem 1rem; border-radius: 20px;font-weight: 700;font-size: .7rem;background: #DEF7EC;color: var(--main-color); cursor: pointer;">View Details</button>
+                                            <button data-hex={{q.randomly_generated_id}} data-hex2={{q.description}} data-hex3={{q.upload}} class="btnSelect" id="badge" style="border:none; padding: .2rem 1rem; border-radius: 20px;font-weight: 700;font-size: .7rem;background: #DEF7EC;color: var(--main-color); cursor: pointer;">View Details</button>
                                         </td>
-                                        <td style="visibility: hidden;" id="discription">{{q.discription}}</td>
-                                        <td style="visibility: hidden;" id="links">{{q.links}}</td>
+                                        {% comment %} <td style="visibility: hidden ; width:0%" id="discription">{{q.description}}</td>
+                                        <td style="visibility: hidden; width:0%" id="links">{{q.upload}}</td> {% endcomment %}
+                                        
+                                    
                                     </tr>
 
                                 </tbody>
@@ -139,39 +142,43 @@
 
                     </div>
                     <div class="summary">
-                        <div class="summary-card">
-                            <div class="summary-single">
-                                <span class="ti-align-justify"></span>
-                                <div>
-                                    <h5>Discription</h5>
-                                    <small class="prodis" id="prodisc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti magni in ullam suscipit excepturi beatae possimus deserunt iusto recusandae, quos ea, autem repellendus quis magnam perferendis? Nesciunt ut perferendis optio.</small>
+                        <form href="{% url 'projects'%}" method="POST">
+                            {% csrf_token %}
+                            <div class="summary-card">
+                                <div class="summary-single">
+                                    <span class="ti-align-justify"></span>
+                                    <div>
+                                        <h5>Discription</h5>
+                                        <small class="prodis" id="prodisc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti magni in ullam suscipit excepturi beatae possimus deserunt iusto recusandae, quos ea, autem repellendus quis magnam perferendis? Nesciunt ut perferendis optio.</small>
+                                    </div>
+                                </div>
+                                <div class="summary-single">
+                                    <span class="ti-files"></span>
+                                    <div>
+                                        <h5>Attached Files</h5>
+                                        <small id="prolinks">link</small>
+                                    </div>
+                                </div>
+                                <div class="summary-single">
+                                    <span class="ti-money"></span>
+                                    <div>
+                                        <h6 id="question_id"> </h6><input style="display:none" id="ques_id">
+                                        <h5>Bid</h5>
+                                        <input type="text" placeholder="Amount in $">
+                                        <br>
+                                        <br>
+                                        <input type="text" placeholder="Message To Student" class="message">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="text-center">
+                                    <button type="submit">
+                                        <span class="ti-angle-double-right"></span>
+                                        Next
+                                    </button>
                                 </div>
                             </div>
-                            <div class="summary-single">
-                                <span class="ti-files"></span>
-                                <div>
-                                    <h5>Attached Files</h5>
-                                    <small id="prolinks">link</small>
-                                </div>
-                            </div>
-                            <div class="summary-single">
-                                <span class="ti-money"></span>
-                                <div>
-                                    <h5>Bid</h5>
-                                    <input type="text" placeholder="Amount in $">
-                                    <br>
-                                    <br>
-                                    <input type="text" placeholder="Message To Student" class="message">
-                                </div>
-                            </div>
-                            <br>
-                            <div class="text-center">
-                                <button>
-                                    <span class="ti-angle-double-right"></span>
-                                    Next
-                                </button>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </section>
@@ -183,11 +190,15 @@
      <script>
         $(document).ready(function(){
             // code to read selected table row cell data (values).
-            $(".btnSelect").on('click',function(){
+            $(".btnSelect").on('click',function(e){
                  var currentRow=$(this).closest("tr");
-                 var col1=currentRow.find("td:eq(5)").html();
-                 var col2=currentRow.find("td:eq(6)").html();
+                 var col1=e.currentTarget.dataset.hex2;
+                 var col2=e.currentTarget.dataset.hex3;
+                 var col3=e.currentTarget.dataset.hex;
+                 console.log(e.currentTarget.dataset.hex)
                  var data=col1+"\n"+col2;
+                 document.getElementById("question_id").innerHTML=col3;
+                 document.getElementById("ques_id").value=col3;
                  document.getElementById("prodisc").innerHTML = col1;
                  document.getElementById("prolinks").innerHTML = col2;
 
