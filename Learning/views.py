@@ -8,6 +8,8 @@ from django.core.mail import EmailMessage
 from django.contrib import messages
 from django.conf import settings
 import datetime 
+from student.forms import *
+import os
 
 
 def index(request):
@@ -106,32 +108,50 @@ def stu_dashboard(request):
     return render(request, "student/index.html", context)
 
 def Post_question(request):
+    
     if request.method == 'POST':
-        cat = request.POST.get('radio')
-        print(cat)
+        form = QuestionForm(request.POST, request.FILES)
+        print(form)
+        if form.is_valid():
+            # file is saved
+            print("sucesss"*100)
+            form.save()
+        else:
+            print(form.errors)
+        # cat = request.POST.get('radio')
+        # print(cat)
         
-        date = datetime.date.today()
-        print(date)
-        current_time = datetime.datetime.now()
-        time = current_time.strftime("%H:%M:%S")
-        print(time)
+        # date = datetime.date.today()
+        # print(date)
+        # current_time = datetime.datetime.now()
+        # time = current_time.strftime("%H:%M:%S")
+        # print(time)
         
-        description = request.POST.get('description')
-        urgency = request.POST.get('urgency')
-        zip = request.POST.get('myFile')
-        print(zip)
-        user = User.objects.get(username = request.user)
-        stu = Student.objects.get(username=user)
+        # description = request.POST.get('description')
+        # urgency = request.POST.get('urgency')
+        # # zip = ModelWithFileField(file_field=request.FILES['myFile'])
+        # # handle_uploaded_file(request.FILES['myFile'])
+        # # print(zip)
+        # user = User.objects.get(username = request.user)
+        # stu = Student.objects.get(username=user)
         
-        que = Question.objects.create(student=stu,category=cat,urgency=urgency,description=description,upload=zip,date=date,time=time)
-        que.save()
+        # que = Question.objects.create(student=stu,category=cat,urgency=urgency,description=description,date=date,time=time)
+        # k=que(upload=request.FILES['myFile'])
+        # k.save()
+        # que.save()
         context = {
-            'name': request.user
+            'name': request.user,
+            'errors':form.errors
         }
         return render(request, "student/postquestion.html", context)
     else:
+        form = QuestionForm()
+        user = User.objects.get(username = request.user)
+        stu = Student.objects.get(username=user)
         context = {
-            'name': request.user
+            'name': request.user,
+            'form':form,
+            'stu':stu
         }
         return render(request, "student/postquestion.html", context)
 

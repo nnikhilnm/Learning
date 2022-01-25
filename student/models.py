@@ -49,8 +49,8 @@ class Question(models.Model):
     urgency= models.CharField(max_length=250, null=True)
     description=models.CharField(max_length=250, null=True)
     upload = models.FileField(upload_to ='static/media/', null=True)
-    date = models.DateField()
-    time = models.TimeField()
+    date = models.DateField(null=True)
+    time = models.TimeField(null=True)
 
     def __str__(self):
         return str(self.category)
