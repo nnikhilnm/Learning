@@ -111,13 +111,13 @@ def Post_question(request):
     
     if request.method == 'POST':
         form = QuestionForm(request.POST, request.FILES)
-        print(form)
+        print(form[student])
         if form.is_valid():
             # file is saved
-            print("sucesss"*100)
             form.save()
         else:
             print(form.errors)
+        
         # cat = request.POST.get('radio')
         # print(cat)
         
@@ -139,9 +139,14 @@ def Post_question(request):
         # k=que(upload=request.FILES['myFile'])
         # k.save()
         # que.save()
+        form = QuestionForm()
+        user = User.objects.get(username = request.user)
+        stu = Student.objects.get(username=user)
         context = {
             'name': request.user,
-            'errors':form.errors
+            'errors':form.errors,
+            'form':form,
+            'stu':stu
         }
         return render(request, "student/postquestion.html", context)
     else:
