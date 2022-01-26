@@ -97,7 +97,11 @@ def Forgot(request):
                 'Reset your password', 'Kapil this is your reset link', settings.EMAIL_HOST_USER, to=[Email]
             )
             email.send(fail_silently=True)
-            return render(request, "reset_password.html")
+            
+            context = {
+                'email':Email,
+            }
+            return render(request, "reset_password.html", context)
     else:
         return render(request, "Password.html")
     
@@ -127,9 +131,14 @@ def Forgot_reset(request):
     if request.method == 'POST':
         new_pass1 = request.POST.get('pass1')
         new_pass2 = request.POST.get('pass2')
-        print(request.user)
+        email = request.POST.get('email')
+        u = User.objects.get(email=email)
         if new_pass1 == new_pass2:
-            pass
+            u.set_password(new_pass2)
+            print(u.password)
+            u.save()
+            print(u)
+            return redirect('student:login')
         else:
             return render(request,'student/createprofile.html')
     else:
