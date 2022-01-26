@@ -19,7 +19,7 @@ from . import views
 
 
 urlpatterns = [
-    path('',views.index),
+    path('',views.index,name="base"),
     path('admin/', admin.site.urls),
     path('student/', include('student.urls', namespace='student'), name='student'),
     path('tutor/create_profile', views.create_profile,name="create_profile"),
@@ -34,6 +34,7 @@ urlpatterns = [
     # path('student/bid', views.stu_bid,name="stu_bid"),
     # path('student/(?P<bid_id>[0-9]*)', views.stu_bid, name = "stu_bid"),
     path("student/<int:myid>", views.stu_bid, name='stu_bid'),
+    path("logout/", views.logout_user, name='logout'),
     
     
     # path('tutor/login',views.authenticate())

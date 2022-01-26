@@ -7,4 +7,4 @@ from .models import *
 class QuestionForm(forms.ModelForm):
     class Meta:
         model = Question
-        fields = ['student', 'category','description','upload','urgency']
+        fields = ['student', 'category','description','upload','urgency','date','time']

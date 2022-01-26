@@ -59,6 +59,7 @@ def projects(request):
         print(q.student)
     context = {
         'question' : question,
+        'user' : request.user
     }
     return render(request, "tutor/projects.html", context)
 
@@ -111,9 +112,11 @@ def Post_question(request):
     
     if request.method == 'POST':
         form = QuestionForm(request.POST, request.FILES)
+        msg=""
         # print(form)
         if form.is_valid():
             # file is saved
+            msg="Question Posted Successfully"
             form.save()
         else:
             print(form.errors)
@@ -142,11 +145,13 @@ def Post_question(request):
         form = QuestionForm()
         user = User.objects.get(username = request.user)
         stu = Student.objects.get(username=user)
+        
         context = {
             'name': request.user,
             'errors':form.errors,
             'form':form,
-            'stu':stu
+            'stu':stu,
+            'msg':msg
         }
         return render(request, "student/postquestion.html", context)
     else:
@@ -189,6 +194,10 @@ def create_bid(request):
         print(tut)
         new_tutor = Bid.objects.create(tutor=tut,project=que,description=message,cost=bid,day="5")
         new_tutor.save()
-        return render(request, 'student/bid.html')
+        return redirect("projects")
     else:
         return render(request, 'student/bid.html')
+
+def logout_user(request):
+    logout(request)
+    return redirect('base')
