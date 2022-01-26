@@ -111,7 +111,7 @@ def Post_question(request):
     
     if request.method == 'POST':
         form = QuestionForm(request.POST, request.FILES)
-        print(form[student])
+        # print(form)
         if form.is_valid():
             # file is saved
             form.save()
@@ -178,4 +178,17 @@ def stu_bid(request, myid):
     return render(request, 'student/bid.html', context)
 
 def create_bid(request):
-    pass
+    if request.method == 'POST':
+        bid = request.POST.get('Bid')
+        message = request.POST.get('message')
+        desc = request.POST.get('urls')
+        print(f"<<<<<<<<------skdnboubw/////--{desc}---->><<djcbiwbi--------->>>>>>>>>")
+        tut = Tutor.objects.get(username=request.user)
+        que = Question.objects.get(randomly_generated_id=desc)
+        print(bid)
+        print(tut)
+        new_tutor = Bid.objects.create(tutor=tut,project=que,description=message,cost=bid,day="5")
+        new_tutor.save()
+        return render(request, 'student/bid.html')
+    else:
+        return render(request, 'student/bid.html')

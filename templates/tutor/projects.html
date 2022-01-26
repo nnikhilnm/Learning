@@ -142,43 +142,43 @@
 
                     </div>
                     <div class="summary">
-                        <form href="{% url 'projects'%}" method="POST">
+                        <div class="summary-card">
+                            <form action="{% url 'bid_create' %}" method="POST">
                             {% csrf_token %}
-                            <div class="summary-card">
                                 <div class="summary-single">
                                     <span class="ti-align-justify"></span>
                                     <div>
                                         <h5>Discription</h5>
-                                        <small class="prodis" id="prodisc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti magni in ullam suscipit excepturi beatae possimus deserunt iusto recusandae, quos ea, autem repellendus quis magnam perferendis? Nesciunt ut perferendis optio.</small>
+                                        <small class="prodis" id="prodisc"></small>
                                     </div>
                                 </div>
                                 <div class="summary-single">
                                     <span class="ti-files"></span>
                                     <div>
                                         <h5>Attached Files</h5>
-                                        <small id="prolinks">link</small>
+                                        <small id="prolinks"></small>
                                     </div>
                                 </div>
                                 <div class="summary-single">
                                     <span class="ti-money"></span>
                                     <div>
-                                        <h6 id="question_id"> </h6><input style="display:none" id="ques_id">
+                                        <h6 id="question_id"> </h6><input style="display:none" name="urls" id="ques_id" required>
                                         <h5>Bid</h5>
-                                        <input type="text" placeholder="Amount in $">
+                                        <input type="text" name="Bid" placeholder="Amount in $">
                                         <br>
                                         <br>
-                                        <input type="text" placeholder="Message To Student" class="message">
+                                        <input type="text" name="message" placeholder="Message To Student" class="message">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="text-center">
                                     <button type="submit">
-                                        <span class="ti-angle-double-right"></span>
-                                        Next
+                                        Submit
                                     </button>
-                                </div>
-                            </div>
-                        </form>
+                                </div> 
+                            </form>
+                        </div>
+                       
                     </div>
                 </div>
             </section>

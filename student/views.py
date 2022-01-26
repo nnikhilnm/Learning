@@ -100,6 +100,14 @@ def Forgot(request):
             return render(request, "reset_password.html")
     else:
         return render(request, "Password.html")
+    
+def reset_passward(request):
+    if request.method == "POST":
+        user = User.objects.get(username=request.user)
+        print(user)
+        return render(request, 'login.html')
+    else:
+        return render(request, 'login.html')
   
 def createprofile(request):
     if request.method=="POST":
@@ -113,4 +121,16 @@ def createprofile(request):
         except:
             return redirect('student:login')
     else:        
+        return render(request,'student/createprofile.html')
+    
+def Forgot_reset(request):
+    if request.method == 'POST':
+        new_pass1 = request.POST.get('pass1')
+        new_pass2 = request.POST.get('pass2')
+        print(request.user)
+        if new_pass1 == new_pass2:
+            pass
+        else:
+            return render(request,'student/createprofile.html')
+    else:
         return render(request,'student/createprofile.html')
