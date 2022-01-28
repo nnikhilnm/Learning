@@ -53,12 +53,25 @@ def dashboard(request):
 
 def projects(request):
     question = Question.objects.all()
+    user=Tutor.objects.get(username=request.user)
+    bid_question=Bid.objects.filter(tutor=user)
+    list=[]
+    for q in question:
+        flag=0
+        for b in bid_question:
+            if b.project==q:
+                flag=1
+                break
+        if flag==0:
+            list.append(q)
+    print(list)
+
     print("<<<<----This is projects part---->>>>")
     print(question)
     for q in question:
         print(q.student)
     context = {
-        'question' : question,
+        'question' : list,
         'user' : request.user
     }
     return render(request, "tutor/projects.html", context)
