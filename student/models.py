@@ -7,6 +7,7 @@ import uuid
 COLOR_STATUS = (
     ('Open','Open'),
     ('Progress', 'Progress'),
+    ('Declined', 'Declined'),
     ('Delivered','Delivered'),
     ('Completed','Completed'),
     ('Dispute','Dispute')

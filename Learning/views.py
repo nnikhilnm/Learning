@@ -214,3 +214,21 @@ def create_bid(request):
 def logout_user(request):
     logout(request)
     return redirect('base')
+
+def bid_approve(request):
+    if request.method=='POST':
+        t=Tutor.objects.get(id=request.POST.get('tutor_id'))
+        q=Question.objects.get(id=request.POST.get('ques_id'))
+        b=Bid.objects.get(tutor=t,project=q)
+        b.status='Progress'
+        b.save()
+        all_bid=Bid.objects.filter(project=q)
+        for bid in all_bid:
+            if bid!=b:
+                bid.status='Declined'
+                bid.save()
+        
+        print(t)
+        print(b)
+        return redirect('stu_dashboard')
+        
