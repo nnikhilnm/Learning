@@ -97,16 +97,17 @@ def todo_list(request):
     return render(request, "tutor/todo.html",context)
 
 
-def ticket(request):
+def Tutor_ticket(request):
     if request.method == "POST":
         ques_id = request.POST.get("question-id")
         description = request.POST.get("discription")
         print(ques_id)
         print(description)
-        ticket = Ticket.objects.create(question_id=str(ques_id),tutor=Tutor.objects.get(username=request.user),description=description)
+        ticket = TutorTicket.objects.create(question_id=str(ques_id),tutor=Tutor.objects.get(username=request.user),description=description)
         print(ticket)
         ticket.save()
     return render(request, "tutor/ticket.html")
+
 
 ####Login to kar
 # password -1234
@@ -179,6 +180,12 @@ def Post_question(request):
         return render(request, "student/postquestion.html", context)
 
 def stu_ticket(request):
+    if request.method == 'POST':
+        ques_id = request.POST.get('ques_ID')
+        mess = request.POST.get('message')
+        ticket = StudentTicket.objects.create(question_id=str(ques_id),student=Student.objects.get(username=request.user),description=mess)
+        print(ticket)
+        ticket.save()
     context = {
         'name': request.user
     }

@@ -76,7 +76,7 @@ class Bid(models.Model):
     def __str__(self):
         return str(self.tutor.username) + str(' | ') + str(self.project.id) 
 
-class Ticket(models.Model):
+class TutorTicket(models.Model):
     question_id = models.CharField(max_length=250, null=True)
     tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE, null=True, blank=True)
     description = models.CharField(max_length=250, null=True)
@@ -84,3 +84,10 @@ class Ticket(models.Model):
     def _str_(self):
         return str(self.tutor.username) + str(' | ') + str(self.question_id)
     
+class StudentTicket(models.Model):
+    question_id = models.CharField(max_length=250, null=True)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, null=True, blank=True)
+    description = models.CharField(max_length=250, null=True)
+    
+    def _str_(self):
+        return str(self.student.username) + str(' | ') + str(self.question_id)
