@@ -132,7 +132,7 @@ def createprofile(request):
             student.fullname=User.objects.get(username=request.user).first_name+" "+User.objects.get(username=request.user).last_name
             student.avtar="https://avatars.dicebear.com/api/"+str(request.POST.get('gender'))+'/'+User.objects.get(username=request.user).first_name+".svg"
             student.save()
-            return redirect('')
+            return redirect('stu_dashboard')
         except:
             return redirect('student:login')
     else:        
