@@ -145,7 +145,7 @@ setInterval(function(){
 
     $.ajax({
       type:'POST',
-      url:'chat/send',
+      url:'/chat/send',
       data:{
           username:$('#username').val(),
           room_id:$('#room_id').val(),
