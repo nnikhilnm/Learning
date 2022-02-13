@@ -29,7 +29,7 @@ class Student(models.Model):
     avtar=models.CharField(max_length=260,blank=True)
     is_tutor= models.BooleanField(default=False)
     def __str__(self):
-        return str(self.username) + str(' | ') + self.fullname
+        return str(self.username) + str(' | ') + str(self.fullname)
     
 class Tutor(models.Model):
     username = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)

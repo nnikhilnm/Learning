@@ -11,23 +11,42 @@ def home(request):
     user = User.objects.get(username = request.user)
     print(user)
     try:
-        t=Tutor.objects.get(username=user)
-        r=Room.objects.filter(tutor=t)
+        s=Tutor.objects.get(username=user)
+        r=Room.objects.filter(tutor=s)
      
     except:
         s=Student.objects.get(username=user)
-        r=Room.objects.filter(student=s)   
+        r=Room.objects.filter(student=s)  
+    
 
     return render(request, "message.html",{'room':r})
 
 def room(request, room):
-    username = request.user.username
+    user = request.user
     room_details = Room.objects.get(name=room)
-    return render(request, 'chat/room.html', {
-        'username': username,
-        'room': room,
-        'room_details': room_details
-    })
+    print(user)
+    if request.user.is_authenticated:
+        try:
+            s=Tutor.objects.get(username=user)
+            r=Room.objects.get(tutor=s)
+        
+        except:
+            s=Student.objects.get(username=user)
+            r=Room.objects.get(student=s) 
+        
+        print(s)
+        print(r)
+        if r.name==room:
+            return render(request, 'chat/room.html', {
+                'username': user.username,
+                'room': room,
+                'room_details': room_details
+            })
+        else:
+            return render(request, 'login.html')
+        
+    else:
+        return redirect('base')
 
 def checkview(request):
     room = request.POST['room_name']
