@@ -9,6 +9,7 @@ from django.contrib import messages
 from django.conf import settings
 import datetime 
 from student.forms import *
+from chat.models import *
 import os
 
 
@@ -237,5 +238,19 @@ def bid_approve(request):
         
         print(t)
         print(b)
+        r=Room.objects.create(tutor=t,student=q.student,name=b.id)
+        print(r)
         return redirect('stu_dashboard')
         
+def message(request):
+    user = User.objects.get(username = request.user)
+    print(user)
+    try:
+        t=Tutor.objects.get(username=user)
+        r=Room.objects.filter(tutor=t)
+     
+    except:
+        s=Student.objects.get(username=user)
+        r=Room.objects.filter(student=s)   
+
+    return render(request, "message.html",{'room':r})

@@ -22,7 +22,7 @@ urlpatterns = [
     path('',views.index,name="base"),
     path('admin/', admin.site.urls),
     path('student/', include('student.urls', namespace='student'), name='student'),
-    path('chat/', include('chat.urls', namespace='chat'), name='chat'),
+    path('chat/', include('chat.urls', namespace='chat'), name='message'),
     path('tutor/create_profile', views.create_profile,name="create_profile"),
     path('tutor/dashboard', views.dashboard,name="dashboard"),
     path('tutor/Projects', views.projects,name="projects"),
@@ -37,7 +37,7 @@ urlpatterns = [
     path("student/<int:myid>", views.stu_bid, name='stu_bid'),
     path("student/bid_approve/",views.bid_approve,name='bid_approve'),
     path("logout/", views.logout_user, name='logout'),
-    
+    # path("message/", views.message, name='message'),
     
     # path('tutor/login',views.authenticate())
 ]

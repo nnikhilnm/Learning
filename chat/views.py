@@ -8,10 +8,20 @@ from django.contrib import messages
 from django.conf import settings
 from chat.models import Room, Message
 def home(request):
-    return render(request,"chat/home.html")
+    user = User.objects.get(username = request.user)
+    print(user)
+    try:
+        t=Tutor.objects.get(username=user)
+        r=Room.objects.filter(tutor=t)
+     
+    except:
+        s=Student.objects.get(username=user)
+        r=Room.objects.filter(student=s)   
+
+    return render(request, "message.html",{'room':r})
 
 def room(request, room):
-    username = request.GET.get('username')
+    username = request.user.username
     room_details = Room.objects.get(name=room)
     return render(request, 'chat/room.html', {
         'username': username,
