@@ -239,7 +239,12 @@ def bid_approve(request):
         print(t)
         print(b)
         r=Room.objects.create(tutor=t,student=q.student,name=b.id)
+        r.save()
         print(r)
+        val = "Your bid got selected"
+        t = Message.objects.create(value=val,user=request.user.username,room=r.id)
+        t.save()        
+        
         return redirect('stu_dashboard')
         
 def message(request):
