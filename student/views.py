@@ -6,7 +6,8 @@ from .models import *
 from django.core.mail import EmailMessage
 from django.contrib import messages
 from django.conf import settings
-
+import math
+import random
 
 # Create your views here.
 def login_user(request):
@@ -89,14 +90,24 @@ def Forgot(request):
         Email = request.POST.get('Email')
         user = User.objects.get(email=Email) 
         
+        
         if not user:
             messages.success(request, 'User not found') 
             return redirect(request, "Password.html")
         else:
-            email = EmailMessage(
-                'Reset your password', 'Kapil this is your reset link', settings.EMAIL_HOST_USER, to=[Email]
-            )
-            email.send(fail_silently=True)
+            OTP = ""
+            string = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+            length = len(string)
+            for i in range(6) :
+                OTP += string[math.floor(random.random() * length)]
+            subject = f'Your UserName is {user.username} One Time Password (OTP) for password reset: '
+            email2 = EmailMessage(
+                        subject, OTP, settings.EMAIL_HOST_USER, to=[Email]
+                            )
+            print(email2)
+            email2.send(fail_silently=True)
+            print(OTP)
+            request.session['OTP'] = OTP
             
             context = {
                 'email':Email,
@@ -121,7 +132,7 @@ def createprofile(request):
             student.fullname=User.objects.get(username=request.user).first_name+" "+User.objects.get(username=request.user).last_name
             student.avtar="https://avatars.dicebear.com/api/"+str(request.POST.get('gender'))+'/'+User.objects.get(username=request.user).first_name+".svg"
             student.save()
-            return redirect('')
+            return redirect('stu_dashboard')
         except:
             return redirect('student:login')
     else:        
@@ -129,17 +140,23 @@ def createprofile(request):
     
 def Forgot_reset(request):
     if request.method == 'POST':
+        otp=request.POST.get('otp')
         new_pass1 = request.POST.get('pass1')
         new_pass2 = request.POST.get('pass2')
         email = request.POST.get('email')
         u = User.objects.get(email=email)
-        if new_pass1 == new_pass2:
+        if new_pass1 == new_pass2 and otp== request.session['OTP']:
             u.set_password(new_pass2)
             print(u.password)
             u.save()
             print(u)
             return redirect('student:login')
         else:
-            return render(request,'student/createprofile.html')
+            msg="Otp / Password Incorrect "
+            context={
+                'msg':msg,
+                'email':email
+            }
+            return render(request,"reset_password.html", context)
     else:
         return render(request,'student/createprofile.html')

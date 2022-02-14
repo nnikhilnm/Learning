@@ -77,7 +77,7 @@
                         <span class="ti-briefcase"></span>
                         <div>
                             <h5>Question Title</h5>
-                            <h4>5</h4>
+                            <h4>{{bid.0.project.id}}:-{{bid.0.project}}</h4>
                         </div>
                     </div>
                      
@@ -88,7 +88,7 @@
                         <span class="ti-check-box"></span>
                         <div>
                             <h5>Start Date</h5>
-                            <h4>3</h4>
+                            <h4>{{bid.0.project.date}}</h4>
                         </div>
                     </div>
                      
@@ -100,7 +100,7 @@
                         <span class="ti-blackboard"></span>
                         <div>
                             <h5>Urgency</h5>
-                            <h4>3</h4>
+                            <h4>{{bid.0.project.urgency}} days</h4>
                         </div>
                     </div>
                      
@@ -127,7 +127,7 @@
                         <span class="ti-blackboard"></span>
                         <div>
                             <h5>Attached Files</h5>
-                            <h4><a href="">Link</a></h4>
+                            <h4><a href={{bid.0.project.upload}}>Link</a></h4>
                         </div>
                     </div>
                      
@@ -151,13 +151,30 @@
                                 <tbody>
                                     {% for b in bid %}
                                     <tr>
-                                        <td>{{b.tutor.Area_of_Expertise}}</td>
+                                        <td>{{b.tutor}}</td>
                                         <td>{{b.description}}</td>
                                         <td>{{b.cost}}$</td>
                                         
-                                        <td>
-                                            <span class="badge success">Approve</span>
+                                        <td>{% if b.status == "Open" %}
+                                            <button class="badge success btnSelect"  data-hex={{b.tutor.id}} data-hex1={{b.project.id}}>Approve</button>
+                                            {%elif b.status == "Progress"%}
+                                            <button class="badge success" >Selected</button>
+                                            {%else%}
+                                            <button class="badge warning" >Rejected</button>
+                                            {% endif %}
                                         </td>
+
+                                       
+                                        
+{% comment %}                                         
+                                    
+                                       {% ifnotequal b.status 'Open'%}
+                                       {% ifequal b.status 'Progress'%}
+                                       <td><button class="badge success" >Selected</button></td>
+                                       {% else %}
+                                       <td><button class="badge success" >Rejected</button></td>
+                                       {% endifequal %}
+                                        {% endifnotequal %}  {% endcomment %}
 
                                     </tr>
                                     {% endfor %}
@@ -170,10 +187,31 @@
                     </div>
                 </div>
             </section>
+            <form id="myform" method="POST" style="display:none;" action="{% url 'bid_approve' %}">
+                {% csrf_token %}
+                <input name="ques_id" id="ques_id" >
+                <input name="tutor_id" id ="tutor_id"> 
+            </form>
             
         </main>
         
     </div>
-    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script>
+        $(document).ready(function(){
+            // code to read selected table row cell data (values).
+            $(".btnSelect").on('click',function(e){
+                 var col1=e.currentTarget.dataset.hex;
+                 var col2=e.currentTarget.dataset.hex1;
+                 console.log(col1);
+                 console.log(col2);
+                 document.getElementById('ques_id').value=col2;
+                 document.getElementById('tutor_id').value=col1;
+                 document.getElementById('myform').submit();
+                
+
+            });
+        });
+        </script>
 </body>
 </html>

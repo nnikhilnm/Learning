@@ -113,13 +113,16 @@
                     <div class="card-single">
                         <div class="card-body">
                             <span class="ti-pencil-alt"></span>
+                            <form action"{% url 'stu_ticket' %}" method="POST">
+                                {% csrf_token %}
                             <div class="ticketcard">
-                                <input type="text" placeholder="Question ID" class="quesid">
+                                <input type="text" name="ques_ID" placeholder="Question ID" class="quesid">
                                 <br>
                                 <br>
-                                <textarea type="text" placeholder="Discription" class="description"> </textarea><br>
-                                <button> Submit </button>
+                                <textarea type="text" placeholder="Discription" name="message" class="description"> </textarea><br>
+                                <button type="submit"> Submit </button>
                             </div>
+                        </form>
                         </div>
                          
                     </div>

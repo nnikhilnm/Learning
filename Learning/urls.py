@@ -22,11 +22,12 @@ urlpatterns = [
     path('',views.index,name="base"),
     path('admin/', admin.site.urls),
     path('student/', include('student.urls', namespace='student'), name='student'),
+    path('chat/', include('chat.urls', namespace='chat'), name='message'),
     path('tutor/create_profile', views.create_profile,name="create_profile"),
     path('tutor/dashboard', views.dashboard,name="dashboard"),
     path('tutor/Projects', views.projects,name="projects"),
     path('tutor/todo_list', views.todo_list,name="todo_list"),
-    path('tutor/ticket', views.ticket,name="ticket"),
+    path('tutor/ticket', views.Tutor_ticket,name="ticket"),
     path('tutor/bid_created', views.create_bid,name="bid_create"),
     path('student/dashboard', views.stu_dashboard,name="stu_dashboard"),
     path('student/Post_question', views.Post_question,name="postquestion"),
@@ -34,8 +35,9 @@ urlpatterns = [
     # path('student/bid', views.stu_bid,name="stu_bid"),
     # path('student/(?P<bid_id>[0-9]*)', views.stu_bid, name = "stu_bid"),
     path("student/<int:myid>", views.stu_bid, name='stu_bid'),
+    path("student/bid_approve/",views.bid_approve,name='bid_approve'),
     path("logout/", views.logout_user, name='logout'),
-    
+    # path("message/", views.message, name='message'),
     
     # path('tutor/login',views.authenticate())
 ]

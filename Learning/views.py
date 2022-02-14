@@ -9,6 +9,7 @@ from django.contrib import messages
 from django.conf import settings
 import datetime 
 from student.forms import *
+from chat.models import *
 import os
 
 
@@ -97,16 +98,17 @@ def todo_list(request):
     return render(request, "tutor/todo.html",context)
 
 
-def ticket(request):
+def Tutor_ticket(request):
     if request.method == "POST":
         ques_id = request.POST.get("question-id")
         description = request.POST.get("discription")
         print(ques_id)
         print(description)
-        ticket = Ticket.objects.create(question_id=str(ques_id),tutor=Tutor.objects.get(username=request.user),description=description)
+        ticket = TutorTicket.objects.create(question_id=str(ques_id),tutor=Tutor.objects.get(username=request.user),description=description)
         print(ticket)
         ticket.save()
     return render(request, "tutor/ticket.html")
+
 
 ####Login to kar
 # password -1234
@@ -179,6 +181,12 @@ def Post_question(request):
         return render(request, "student/postquestion.html", context)
 
 def stu_ticket(request):
+    if request.method == 'POST':
+        ques_id = request.POST.get('ques_ID')
+        mess = request.POST.get('message')
+        ticket = StudentTicket.objects.create(question_id=str(ques_id),student=Student.objects.get(username=request.user),description=mess)
+        print(ticket)
+        ticket.save()
     context = {
         'name': request.user
     }
@@ -214,3 +222,40 @@ def create_bid(request):
 def logout_user(request):
     logout(request)
     return redirect('base')
+
+def bid_approve(request):
+    if request.method=='POST':
+        t=Tutor.objects.get(id=request.POST.get('tutor_id'))
+        q=Question.objects.get(id=request.POST.get('ques_id'))
+        b=Bid.objects.get(tutor=t,project=q)
+        b.status='Progress'
+        b.save()
+        all_bid=Bid.objects.filter(project=q)
+        for bid in all_bid:
+            if bid!=b:
+                bid.status='Declined'
+                bid.save()
+        
+        print(t)
+        print(b)
+        r=Room.objects.create(tutor=t,student=q.student,name=b.id)
+        r.save()
+        print(r)
+        val = "Your bid got selected"
+        t = Message.objects.create(value=val,user=request.user.username,room=r.id)
+        t.save()        
+        
+        return redirect('stu_dashboard')
+        
+def message(request):
+    user = User.objects.get(username = request.user)
+    print(user)
+    try:
+        t=Tutor.objects.get(username=user)
+        r=Room.objects.filter(tutor=t)
+     
+    except:
+        s=Student.objects.get(username=user)
+        r=Room.objects.filter(student=s)   
+
+    return render(request, "message.html",{'room':r})
