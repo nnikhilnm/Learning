@@ -58,13 +58,13 @@
 
         <header>
             <div class="search-wrapper">
-                <span>Welcome sss s {{user}}</span>
+                <span>Welcome {{user}}</span>
             </div>
 
             <div class="social-icons">
                 <span class="ti-bell"></span>
-                <span class="ti-comment"></span>
-                <a href="{% url 'chat:home' %}">m</a>
+                <span ><a  class="ti-comment" href="{% url 'chat:home' %}" ></a></span>
+                <span ><a href="{% url 'logout' %}">Logout</a></span>
                 <div></div>
             </div>
         </header>

@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -187,7 +188,7 @@ h1, h2, h3, h4, h5, h6 {
             </li>
             <li class="nav-item"> <a class="nav-link" href="#">Become Tutor</a> </li>
           </ul>
-          <div class="ml-lg-5"><a class="btn btn-success" href="#">Login/Register</a> </div>
+          <div class="ml-lg-5"><a class="btn btn-success" href="{% url 'student:login' %}">Login/Register</a> </div>
         </div>
       </div>
     </nav>
@@ -197,7 +198,7 @@ h1, h2, h3, h4, h5, h6 {
           <div class="col-lg-6 col-md-7 py-5">
             <h1 class="font-weight-bold display-4 mb-4">Become a tutor in your specialites and earn money.  </h1>
             <p class="lead mb-5">Help Student from all around the world with there problems daily.</p>
-            <a href="" class="btn btn-success">Register as a tutor &rarr; </a> </div>
+            <a href="{% url 'student:register' %}" class="btn btn-success">Register as a tutor &rarr; </a> </div>
         </div>
       </div>
     </div>

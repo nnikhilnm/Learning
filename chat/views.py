@@ -10,16 +10,16 @@ from chat.models import Room, Message
 def home(request):
     user = User.objects.get(username = request.user)
     print(user)
+    val=0
     try:
         s=Tutor.objects.get(username=user)
         r=Room.objects.filter(tutor=s)
-     
     except:
         s=Student.objects.get(username=user)
+        val=1
         r=Room.objects.filter(student=s)  
-    
-
-    return render(request, "message.html",{'room':r})
+  
+    return render(request, "message.html",{'room':r,'user':s,'val':val})
 
 def room(request, room):
     user = request.user

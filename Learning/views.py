@@ -7,7 +7,8 @@ from student.models import *
 from django.core.mail import EmailMessage
 from django.contrib import messages
 from django.conf import settings
-import datetime 
+import datetime
+from datetime import timedelta
 from student.forms import *
 from chat.models import *
 import os
@@ -15,6 +16,9 @@ import os
 
 def index(request):
     return render(request,"index.html")
+
+def tutor(request):
+    return render(request,"tutwel.html")
 
 def create_profile(request):
     if request.method == "POST":
@@ -86,7 +90,7 @@ def todo_list(request):
         
         print(b.day)
         print(int(b.day))
-        b.project.date = b.project.date + datetime.timedelta(days=int(b.project.urgency))
+        b.project.date = b.project.date +timedelta(days=int(b.project.urgency))
         print(b.project.date)
         if bd.username == request.user:
             li.append(b)
