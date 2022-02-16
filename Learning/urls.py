@@ -23,7 +23,7 @@ urlpatterns = [
     path('tutor/',views.tutor,name="tutor"),
     path('admin/', admin.site.urls),
     path('student/', include('student.urls', namespace='student'), name='student'),
-    path('chat/', include('chat.urls', namespace='chat'), name='message'),
+    path('chat/', include('chat.urls', namespace='chat'), name='chat'),
     path('tutor/create_profile', views.create_profile,name="create_profile"),
     path('tutor/dashboard', views.dashboard,name="dashboard"),
     path('tutor/Projects', views.projects,name="projects"),
