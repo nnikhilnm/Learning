@@ -135,7 +135,7 @@
       {% csrf_token %}
       <input type="hidden" name="username" id="username" value="{{username}}" />
       <input type="hidden" name="room_id" id="room_id" value="{{room_details.id}}" />
-      <input type="file" name="upload" class="drop-zone__input">
+      <input type="file" name="upload" id="upload" class="drop-zone__input">
       <input type="text" name="message" id="message" width="100px" />
       <input type="submit" value="Send">
     </form>
@@ -156,11 +156,14 @@
       type: 'POST',
       url: '/chat/send',
       data: {
-        username: $('#username').val(),
-        room_id: $('#room_id').val(),
-        message: $('#message').val(),
+        user: $('#username').val(),
+        room: $('#room_id').val(),
+        value: $('#message').val(),
+        upload: $('#upload').files,
+
         csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
       },
+//      data: formData,
       success: function (data) {
         //alert(data)
       }

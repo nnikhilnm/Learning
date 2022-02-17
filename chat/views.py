@@ -7,6 +7,7 @@ from django.core.mail import EmailMessage
 from django.contrib import messages
 from django.conf import settings
 from chat.models import Room, Message
+from .forms import *
 def home(request):
     user = User.objects.get(username = request.user)
     print(user)
@@ -61,12 +62,14 @@ def checkview(request):
 
 
 def send(request):
-    message = request.POST['message']
-    username = request.POST['username']
-    room_id = request.POST['room_id']
-
-    new_message = Message.objects.create(value=message, user=username, room=room_id)
-    new_message.save()
+    print("sfdsfsdfsdfdfs")
+    form = MessageForm(request.POST, request.FILES)
+    if form.is_valid():
+        # file is saved
+        msg="Question Posted Successfully"
+        form.save()
+    else:
+        print(form.errors)
     return HttpResponse('Message sent successfully')
 
 def getMessages(request, room):

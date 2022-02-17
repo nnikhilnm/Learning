@@ -164,23 +164,44 @@ def Post_question(request):
         form = QuestionForm()
         user = User.objects.get(username = request.user)
         stu = Student.objects.get(username=user)
+        que = Question.objects.filter(student=stu)
+        qu = len(que)
+        li = 0
+        for q in que:
+            bid = Bid.objects.filter(project=q)
+            for b in bid:
+                if b.status=='Completed':
+                    li = li+1
         
         context = {
             'name': request.user,
             'errors':form.errors,
             'form':form,
             'stu':stu,
-            'msg':msg
+            'msg':msg,
+            'que':qu,
+            'aaa':li,
         }
         return render(request, "student/postquestion.html", context)
     else:
         form = QuestionForm()
         user = User.objects.get(username = request.user)
         stu = Student.objects.get(username=user)
+        que = Question.objects.filter(student=stu)
+        qu = len(que)
+        li = 0
+        for q in que:
+            bid = Bid.objects.filter(project=q)
+            for b in bid:
+                if b.status=='Completed':
+                    li = li+1
+
         context = {
             'name': request.user,
             'form':form,
-            'stu':stu
+            'stu':stu,
+            'que':qu,
+            'aaa':li,
         }
         return render(request, "student/postquestion.html", context)
 
