@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 
@@ -83,7 +84,7 @@
             console.log(response);
             $("#display").empty();
             for (var key in response.messages) {
-              var temp = "<div class='container darker'><b>" + response.messages[key].user + "</b><p>" + response.messages[key].value + "</p><span class='time-left'>" + response.messages[key].date + "</span></div>";
+              var temp = "<div class='container darker'><b>" + response.messages[key].user + "</b><p>" + response.messages[key].value + "</p><span class='time-left'>" + response.messages[key].date + "</span>"+`</p><span class='time-left'> <img class="image" src="../../${response.messages[key].upload }">` +"</span></div>";
               $("#display").append(temp);
             }
           },
@@ -129,15 +130,21 @@
         background-color: #f2f2f2;
         padding: 20px;
       }
+      .image
+      {
+        width: 50px;
+        height :50px;
+      }
     </style>
 
-    <form id="post-form">
+    <form id="post-form" method="POST" enctype="multipart/form-data"  action="{% url 'chat:photoform' %}" >
       {% csrf_token %}
-      <input type="hidden" name="username" id="username" value="{{username}}" />
-      <input type="hidden" name="room_id" id="room_id" value="{{room_details.id}}" />
+      <input type="hidden" name="user" id="user" value="{{username}}" />
+      <input type="hidden" name="room" id="room" value="{{room_details.id}}" />
       <input type="file" name="upload" id="upload" class="drop-zone__input">
-      <input type="text" name="message" id="message" width="100px" />
-      <input type="submit" value="Send">
+      <input type="hidden" name="room_info" value="{{room_details.name}}"/>
+      <input type="text" name="value" id="value" width="100px" />
+      <input type="button" value="Send" onclick="abc()">
     </form>
 
 
@@ -148,19 +155,24 @@
 </body>
 
 <script type="text/javascript">
-  $(document).on('submit', '#post-form', function (e) {
-    e.preventDefault();
-    var formData = new FormData(this);
+  function abc(e)
+  {
+    var a=document.getElementById('upload')
+    if (a.files.length)
+      {
+        console.log(a.files.length)
+        document.getElementById('post-form').submit();
+        return;
+      }
+
 
     $.ajax({
       type: 'POST',
       url: '/chat/send',
       data: {
-        user: $('#username').val(),
-        room: $('#room_id').val(),
-        value: $('#message').val(),
-        upload: $('#upload').files,
-
+        user: $('#user').val(),
+        room: $('#room').val(),
+        value: $('#value').val(), 
         csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
       },
 //      data: formData,
@@ -168,6 +180,34 @@
         //alert(data)
       }
     });
+
+    document.getElementById('value').value = ''
+  }
+  $(document).on('submit', '#post-form', function (e) {
+    e.preventDefault();
+    var formData = new FormData(this);
+    var a=document.getElementById('upload')
+    if (a.files.length)
+      {
+        console.log(a.files.length)
+        document.getElementById('post-form').submit();
+      }
+
+
+    $.ajax({
+      type: 'POST',
+      url: '/chat/send',
+      data: {
+        user: $('#username').val(),
+        room: $('#room_id').val(),
+        value: $('#message').val(), 
+        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+      },
+//      data: formData,
+      success: function (data) {
+        //alert(data)
+      }
+    });``
     document.getElementById('message').value = ''
   });
 </script>

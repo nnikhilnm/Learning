@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate ,login ,logout
-from django.http import HttpResponse, JsonResponse, Http404
+from django.http import HttpResponse, JsonResponse, Http404,HttpResponseRedirect
 from .models import *
 from django.core.mail import EmailMessage
 from django.contrib import messages
@@ -19,6 +19,8 @@ def home(request):
         s=Student.objects.get(username=user)
         val=1
         r=Room.objects.filter(student=s)  
+
+    
   
     return render(request, "message.html",{'room':r,'user':s,'val':val})
 
@@ -36,7 +38,7 @@ def room(request, room):
             r=Room.objects.get(student=s) 
         
         print(s)
-        print(r)
+
         if r.name==room:
             return render(request, 'chat/room.html', {
                 'username': user.username,
@@ -63,17 +65,37 @@ def checkview(request):
 
 def send(request):
     print("sfdsfsdfsdfdfs")
+    print( request.FILES)
+    r=request.POST.get('room_info')
     form = MessageForm(request.POST, request.FILES)
     if form.is_valid():
-        # file is saved
         msg="Question Posted Successfully"
         form.save()
     else:
         print(form.errors)
-    return HttpResponse('Message sent successfully')
+    return HttpResponseRedirect("/chat/"+r)
+        
 
 def getMessages(request, room):
     room_details = Room.objects.get(name=room)
 
     messages = Message.objects.filter(room=room_details.id)
+
+    print("100"*100)
+    for m in messages:
+        print(m.upload.url)
     return JsonResponse({"messages":list(messages.values())})
+
+def photoform(request):
+    print('maa ak bhosada')
+    if request.method == 'POST':
+        form = MessageForm(request.POST, request.FILES)
+        msg=""
+        if form.is_valid():
+            msg="Question Posted Successfully"
+            form.save()
+        else:
+            print(form.errors)
+
+    else:
+        print('fail')
