@@ -60,7 +60,18 @@ def projects(request):
     question = Question.objects.all()
     user=Tutor.objects.get(username=request.user)
     bid_question=Bid.objects.filter(tutor=user)
+    bid = Bid.objects.all()
     list=[]
+    count=0
+    count1=0
+    
+    for b in bid:
+        bd = b.tutor
+        if bd.username == request.user and b.status=='Progress':
+            count += 1
+        if bd.username == request.user and b.status=='Completed':
+            count1 += 1
+    
     for q in question:
         flag=0
         for b in bid_question:
@@ -77,13 +88,18 @@ def projects(request):
         print(q.student)
     context = {
         'question' : list,
-        'user' : request.user
+        'user' : request.user,
+        'count':count,
+        'count1':count1,
     }
     return render(request, "tutor/projects.html", context)
 
 def todo_list(request):
     bid = Bid.objects.all()
     li = []
+    count=0
+    count1=0
+    count2=0
     for b in bid:
         bd = b.tutor
         print(b.project.date)
@@ -94,10 +110,19 @@ def todo_list(request):
         print(b.project.date)
         if bd.username == request.user:
             li.append(b)
+        if bd.username == request.user and b.status=='Progress':
+            count += 1
+        if bd.username == request.user and b.status=='Delivered':
+            count1 += 1
+        if bd.username == request.user and b.status=='Completed':
+            count2 += 1
     
     print(li)
     context = {
-        'bid' : li
+        'bid' : li,
+        'count':count,
+        'count1':count1,
+        'count2':count2,
     }
     return render(request, "tutor/todo.html",context)
 
@@ -284,3 +309,153 @@ def message(request):
         r=Room.objects.filter(student=s)   
 
     return render(request, "message.html",{'room':r})
+
+def todo_list_open(request):
+    bid = Bid.objects.all()
+    li = []
+    count=0
+    count1=0
+    count2=0
+    for b in bid:
+        bd = b.tutor
+        b.project.date = b.project.date +timedelta(days=int(b.project.urgency))
+        if bd.username == request.user and b.status=='Open':
+            li.append(b)
+        if bd.username == request.user and b.status=='Progress':
+            count += 1
+        if bd.username == request.user and b.status=='Delivered':
+            count1 += 1
+        if bd.username == request.user and b.status=='Completed':
+            count2 += 1
+    context = {
+        'bid' : li,
+        'count':count,
+        'count1':count1,
+        'count2':count2,
+    }
+    return render(request, "tutor/todo.html",context)
+
+def todo_list_progress(request):
+    bid = Bid.objects.all()
+    li = []
+    count=0
+    count1=0
+    count2=0
+    for b in bid:
+        bd = b.tutor
+        b.project.date = b.project.date +timedelta(days=int(b.project.urgency))
+        if bd.username == request.user and b.status=='Progress':
+            li.append(b)
+            count += 1
+        if bd.username == request.user and b.status=='Delivered':
+            count1 += 1
+        if bd.username == request.user and b.status=='Completed':
+            count2 += 1
+    
+    print(li)
+    context = {
+        'bid' : li,
+        'count':count,
+        'count1':count1,
+        'count2':count2,
+    }
+    return render(request, "tutor/todo.html",context)
+
+def todo_list_declined(request):
+    bid = Bid.objects.all()
+    li = []
+    count=0
+    count1=0
+    count2=0
+    for b in bid:
+        bd = b.tutor
+        b.project.date = b.project.date +timedelta(days=int(b.project.urgency))
+        if bd.username == request.user and b.status=='Declined':
+            li.append(b)
+        if bd.username == request.user and b.status=='Progress':
+            count += 1
+        if bd.username == request.user and b.status=='Delivered':
+            count1 += 1
+        if bd.username == request.user and b.status=='Completed':
+            count2 += 1
+    context = {
+        'bid' : li,
+        'count':count,
+        'count1':count1,
+        'count2':count2
+    }
+    return render(request, "tutor/todo.html",context)
+
+def todo_list_delivered(request):
+    bid = Bid.objects.all()
+    li = []
+    count=0
+    count1=0
+    count2=0
+    for b in bid:
+        bd = b.tutor
+        b.project.date = b.project.date +timedelta(days=int(b.project.urgency))
+        if bd.username == request.user and b.status=='Delivered':
+            li.append(b)
+            count1 += 1
+        if bd.username == request.user and b.status=='Progress':
+            count += 1
+        if bd.username == request.user and b.status=='Completed':
+            count2 += 1
+    context = {
+        'bid' : li,
+        'count':count,
+        'count1':count1,
+        'count2':count2,
+    }
+    return render(request, "tutor/todo.html",context)
+
+
+def todo_list_completed(request):
+    bid = Bid.objects.all()
+    li = []
+    count=0
+    count1=0
+    count2=0
+    for b in bid:
+        bd = b.tutor
+        b.project.date = b.project.date +timedelta(days=int(b.project.urgency))
+        if bd.username == request.user and b.status=='Completed':
+            li.append(b)
+            count2 += 1
+        if bd.username == request.user and b.status=='Progress':
+            count += 1
+        if bd.username == request.user and b.status=='Delivered':
+            count1 += 1
+    context = {
+        'bid' : li,
+        'count':count,
+        'count1':count1,
+        'count2':count2,
+    }
+    return render(request, "tutor/todo.html",context)
+
+def todo_list_dispute(request):
+    bid = Bid.objects.all()
+    li = []
+    count=0
+    count1=0
+    count2=0
+    for b in bid:
+        bd = b.tutor
+        b.project.date = b.project.date +timedelta(days=int(b.project.urgency))
+        if bd.username == request.user and b.status=='Dispute':
+            li.append(b)
+        if bd.username == request.user and b.status=='Progress':
+            count += 1
+        if bd.username == request.user and b.status=='Delivered':
+            count1 += 1
+        if bd.username == request.user and b.status=='Completed':
+            count2 += 1
+    context = {
+        'bid' : li,
+        'count':count,
+        'count1':count1,
+        'count2':count2,
+    }
+    return render(request, "tutor/todo.html",context)
