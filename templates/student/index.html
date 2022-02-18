@@ -122,6 +122,7 @@
                                         <th>Discription</th>
                                         <th>Start Date</th>
                                         <th>Urgency</th>
+                                        <th>Question id</th>
                                         <th>File</th>
                                         <th>Bids</th>
                                     </tr>
@@ -133,7 +134,8 @@
                                         <td>{{q.description}}</td>
                                         <td>{{q.date}}<br>{{q.time}}</td>
                                         <td>{{q.urgency}}</td>
-                                        <td><a type="download" href="{{q.upload}}">{{q.upload}}</a></td>
+                                        <td>{{q.randomly_generated_id}}
+                                        <td><a type="download" href="{{q.upload}}" style="color:blue" download>Link</a></td>
                                         
                                         <td>
                                             

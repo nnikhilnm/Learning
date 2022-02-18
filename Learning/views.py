@@ -133,9 +133,14 @@ def Tutor_ticket(request):
         description = request.POST.get("discription")
         print(ques_id)
         print(description)
-        ticket = TutorTicket.objects.create(question_id=str(ques_id),tutor=Tutor.objects.get(username=request.user),description=description)
-        print(ticket)
-        ticket.save()
+        try:
+            question = Question.objects.get(randomly_generated_id=ques_id)  
+            ticket = TutorTicket.objects.create(question_id=str(ques_id),project=question,tutor=Tutor.objects.get(username=request.user),description=description)
+            print(ticket)
+            ticket.save()
+        except:
+            pass
+        
     return render(request, "tutor/ticket.html")
 
 
@@ -243,9 +248,13 @@ def stu_ticket(request):
     if request.method == 'POST':
         ques_id = request.POST.get('ques_ID')
         mess = request.POST.get('message')
-        ticket = StudentTicket.objects.create(question_id=str(ques_id),student=Student.objects.get(username=request.user),description=mess)
-        print(ticket)
-        ticket.save()
+        try:
+            question = Question.objects.get(randomly_generated_id=ques_id)  
+            ticket = StudentTicket.objects.create(question_id=str(ques_id),project=question,student=Student.objects.get(username=request.user),description=mess)
+            print(ticket)
+            ticket.save()
+        except:
+            pass
     count=0
     bid = Bid.objects.all()
     count1=0

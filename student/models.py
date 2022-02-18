@@ -78,6 +78,7 @@ class Bid(models.Model):
 
 class TutorTicket(models.Model):
     question_id = models.CharField(max_length=250, null=True)
+    project = models.ForeignKey(Question, on_delete=models.CASCADE, null=True, blank=True)
     tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE, null=True, blank=True)
     description = models.CharField(max_length=250, null=True)
     
@@ -86,6 +87,7 @@ class TutorTicket(models.Model):
     
 class StudentTicket(models.Model):
     question_id = models.CharField(max_length=250, null=True)
+    project = models.ForeignKey(Question, on_delete=models.CASCADE, null=True, blank=True)
     student = models.ForeignKey(Student, on_delete=models.CASCADE, null=True, blank=True)
     description = models.CharField(max_length=250, null=True)
     
