@@ -146,9 +146,18 @@ def stu_dashboard(request):
     user = User.objects.get(username = request.user)
     stu = Student.objects.get(username=user)
     question = Question.objects.filter(student=stu)
+    # //////////////////
+    bid = Bid.objects.all()
+    count=0
+    for b in bid:
+        bd = b.project.student
+        if bd.username == request.user and b.status=='Completed':
+            count += 1
+    # /////////////
     context = {
         'name': request.user,
         'question' : question,
+        'count':count,
     }
     return render(request, "student/index.html", context)
 
@@ -237,8 +246,19 @@ def stu_ticket(request):
         ticket = StudentTicket.objects.create(question_id=str(ques_id),student=Student.objects.get(username=request.user),description=mess)
         print(ticket)
         ticket.save()
+    count=0
+    bid = Bid.objects.all()
+    count1=0
+    for b in bid:
+        bd = b.project.student
+        if bd.username == request.user and b.status=='Completed':
+            count1 += 1
+        if bd.username == request.user:
+            count += 1
     context = {
-        'name': request.user
+        'name': request.user,
+        'que_completed': count1,
+        'posted_que': count,
     }
     return render(request, 'student/ticket.html', context)
 
