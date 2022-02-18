@@ -128,7 +128,7 @@
                                         
 
                                         <td>
-                                            <button data-hex={{q.randomly_generated_id}} data-hex2="{{q.description}}" data-hex3={{q.upload}} class="btnSelect" id="badge" style="border:none; padding: .2rem 1rem; border-radius: 20px;font-weight: 700;font-size: .7rem;background: #DEF7EC;color: var(--main-color); cursor: pointer;" download>View Details</button>
+                                            <button data-hex={{q.randomly_generated_id}} data-hex2="{{q.description}}" data-hex3={{q.upload}} class="btnSelect" id="badge" style="border:none; padding: .2rem 1rem; border-radius: 20px;font-weight: 700;font-size: .7rem;background: #DEF7EC;color: var(--main-color); cursor: pointer;">View Details</button>
                                         </td>
                                         {% comment %} <td style="visibility: hidden ; width:0%" id="discription">{{q.description}}</td>
                                         <td style="visibility: hidden; width:0%" id="links">{{q.upload}}</td> {% endcomment %}
@@ -157,7 +157,7 @@
                                     <span class="ti-files"></span>
                                     <div>
                                         <h5>Attached Files</h5>
-                                        <small id="prolinks"></small>
+                                        <a id="prolinks" download>Link</a>
                                     </div>
                                 </div>
                                 <div class="summary-single">
@@ -201,7 +201,7 @@
                  document.getElementById("question_id").innerHTML=col3;
                  document.getElementById("ques_id").value=col3;
                  document.getElementById("prodisc").innerHTML = col1;
-                 document.getElementById("prolinks").innerHTML = col2;
+                 document.getElementById("prolinks").href = col2;
 
             });
         });
