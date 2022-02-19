@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.conf import settings
 from chat.models import Room, Message
 from .forms import *
+
 def home(request):
     user = User.objects.get(username = request.user)
     print(user)
@@ -78,12 +79,7 @@ def send(request):
 
 def getMessages(request, room):
     room_details = Room.objects.get(name=room)
-
     messages = Message.objects.filter(room=room_details.id)
-
-    print("100"*100)
-    for m in messages:
-        print(m.upload.url)
     return JsonResponse({"messages":list(messages.values())})
 
 def photoform(request):

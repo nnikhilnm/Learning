@@ -64,7 +64,7 @@
 
   <h2>{{request.user.username}}</h2>
 
-  <div id="display">
+  <div id="display" >
 
     <!-- <div class="container darker">
   <b>Tom</b><p>Hello Everyone, How Are You Guys Doing?</p>
@@ -84,7 +84,15 @@
             console.log(response);
             $("#display").empty();
             for (var key in response.messages) {
-              var temp = "<div class='container darker'><b>" + response.messages[key].user + "</b><p>" + response.messages[key].value + "</p><span class='time-left'>" + response.messages[key].date + "</span>"+`</p><span class='time-left'> <img class="image" src="../../${response.messages[key].upload }">` +"</span></div>";
+              var temp;
+              if(response.messages[key].upload )
+              {
+              temp = "<div class='container darker'><b>" + response.messages[key].user + "</b><p>" + response.messages[key].value +`<p><a type="download" href="../../${response.messages[key].upload }" style="color:blue" download>Link</a></p>`+ "</p><span class='time-left'>" + response.messages[key].date + "</span>"+`</p>` +"</div>";
+              }
+              else
+              {
+                temp = "<div class='container darker'><b>" + response.messages[key].user + "</b><p>" + response.messages[key].value + "</p><span class='time-left'>" + response.messages[key].date + "</span>" +"</div>";
+              }
               $("#display").append(temp);
             }
           },

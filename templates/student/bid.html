@@ -159,6 +159,8 @@
                                             <button class="badge success btnSelect"  data-hex={{b.tutor.id}} data-hex1={{b.project.id}}>Approve</button>
                                             {%elif b.status == "Progress"%}
                                             <button class="badge success" >Selected</button>
+                                            {%elif b.status == "Completed"%}
+                                            <button class="badge info" >Completed</button>
                                             {%else%}
                                             <button class="badge warning" >Rejected</button>
                                             {% endif %}

@@ -28,6 +28,7 @@ urlpatterns = [
     path('tutor/dashboard', views.dashboard,name="dashboard"),
     path('tutor/Projects', views.projects,name="projects"),
     path('tutor/todo_list', views.todo_list,name="todo_list"),
+    path('tutor/todo_list', views.final_submit,name="final_submit"),
     path('tutor/todo_list_open', views.todo_list_open,name="open"),
     path('tutor/todo_list_progress', views.todo_list_progress,name="progress"),
     path('tutor/todo_list_declined', views.todo_list_declined,name="declined"),

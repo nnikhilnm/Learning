@@ -488,3 +488,6 @@ def todo_list_dispute(request):
         'count2':count2,
     }
     return render(request, "tutor/todo.html",context)
+
+def final_submit(request):
+    pass

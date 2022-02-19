@@ -7,7 +7,6 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
     <link rel="stylesheet" href="{% static 'css/todo.css' %}">
-
     <style>
         .filter{
             padding: 10px;
@@ -152,7 +151,7 @@
                                         </td>
 
                                         <td>
-                                            <span class="badge success">View Details</span>
+                                            <span class="btnSelect" id="badge" style="border:none; padding: .2rem 1rem; border-radius: 20px;font-weight: 700;font-size: .7rem;background: #DEF7EC;color: var(--main-color); cursor: pointer;"  data-hex={{b.project}} data-hex2="{{b.project.student|capfirst}}" data-hex3={{b.project.date}}>View Details</span>
                                         </td>
                                     </tr>
                                 {% endfor %} 
@@ -163,34 +162,42 @@
                     </div>
                     <div class="summary">
                         <div class="summary-card">
-                            <div class="summary-single">
-                                <span class="ti-align-justify"></span>
-                                <div>
-                                    <h5>Discription</h5>
-                                    <small>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti magni in ullam suscipit excepturi beatae possimus deserunt iusto recusandae, quos ea, autem repellendus quis magnam perferendis? Nesciunt ut perferendis optio.</small>
+                            <form action="{% url 'final_submit' %}" method="POST">
+                            {% csrf_token %}
+                                <div class="summary-single">
+                                    <span class="ti-align-justify"></span>
+                                    <div>
+                                        <h5>Discription</h5>
+                                        <small class="prodis" id="prodisc"></small>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="summary-single">
-                                <span class="ti-files"></span>
-                                <div>
-                                    <h5>Attached Files</h5>
-                                    <small>link</small>
+                                <div class="summary-single">
+                                    <span class="ti-files"></span>
+                                    <div>
+                                        <h5>Attached Files</h5>
+                                        <a id="prolinks" download>Link</a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="summary-single">
-                                <span class="ti-money"></span>
-                                <div>
-                                    <h5>Bid</h5>
-                                    15$
-                                    <h5>Message</h5>
-                                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati magni animi voluptatibus eveniet tenetur, aut sunt tempore? Eius debitis autem obcaecati commodi laudantium odit molestias, culpa iure error, impedit suscipit?
-                                    <br>
-                                    <br>
-                                    
+                                <div class="summary-single">
+                                    <span class="ti-money"></span>
+                                    <div>
+                                        <h6 id="question_id"> </h6><input style="display:none" name="urls" id="ques_id" required>
+                                        <h5>Bid</h5>
+                                        <input type="text" name="Bid" placeholder="Amount in $">
+                                        <br>
+                                        <br>
+                                        <input type="text" name="message" placeholder="Message To Student" class="message">
+                                    </div>
                                 </div>
-                            </div>
-                            <br>
+                                <br>
+                                <div class="text-center">
+                                    <button type="submit">
+                                        Submit
+                                    </button>
+                                </div> 
+                            </form>
                         </div>
+                       
                     </div>
                 </div>
             </section>
@@ -198,6 +205,32 @@
         </main>
         
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+     <!-- <script src="todo.js"></script>    -->
+     <script>
+            // code to read selected table row cell data (values).
+            $(document).ready(function(){
+            $(".btnSelect").on('click',function(e){
+                console.log('laura');
+                 var currentRow=$(this).closest("tr");
+                 var col1=e.currentTarget.dataset.hex2;
+                 var col2=e.currentTarget.dataset.hex3;
+                 var col3=e.currentTarget.dataset.hex;
+                 console.log(e.currentTarget.dataset.hex)
+                 var data=col1+"\n"+col2;
+                 document.getElementById("question_id").innerHTML=col3;
+                 document.getElementById("ques_id").value=col3;
+                 document.getElementById("prodisc").innerHTML = col1;
+                 document.getElementById("prolinks").href = col2;
+
+            });
+        });
+    </script>
+    <script>
+        var a=document.getElementById('display')
+        var b=a.firstElementChild();
+        console.log(b);
+</script>
     
 </body>
 </html>
