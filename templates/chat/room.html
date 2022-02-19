@@ -178,7 +178,7 @@
     <form id="post-form" method="POST" enctype="multipart/form-data"  action="{% url 'chat:photoform' %}" >
       {% csrf_token %}
       <input type="hidden" name="user" id="user" value="{{username}}" />
-      <input type="hidden" name="room" id="room" value="{{room_details.id}}" />
+      <input type="hidden" name="room" id="room" value="{{room_details.name}}" />
       <input type="file" name="upload" id="upload" class="drop-zone__input">
       <input type="hidden" name="room_info" value="{{room_details.name}}"/>
       <input type="text" name="value" id="value" width="100px" />

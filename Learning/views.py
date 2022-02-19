@@ -287,13 +287,30 @@ def create_bid(request):
         bid = request.POST.get('Bid')
         message = request.POST.get('message')
         desc = request.POST.get('urls')
-        print(f"<<<<<<<<------skdnboubw/////--{desc}---->><<djcbiwbi--------->>>>>>>>>")
         tut = Tutor.objects.get(username=request.user)
         que = Question.objects.get(randomly_generated_id=desc)
         print(bid)
         print(tut)
         new_tutor = Bid.objects.create(tutor=tut,project=que,description=message,cost=bid,day="5")
         new_tutor.save()
+        
+        t = Tutor.objects.get(username=request.user)
+        var = str(t.username.username) + "_" + str(que.student.username.username)
+        print(var)
+        
+        room = Room.objects.all()
+        flag=0
+        for qu in room:
+            if qu.name==var:
+                flag=1
+                break
+        if flag==0:
+            r=Room.objects.create(tutor=t,student=que.student,name=var)
+            r.save()
+            print(r)
+
+        
+        
         return redirect("projects")
     else:
         return render(request, 'student/bid.html')
@@ -317,11 +334,10 @@ def bid_approve(request):
         
         print(t)
         print(b)
-        r=Room.objects.create(tutor=t,student=q.student,name=b.id)
-        r.save()
-        print(r)
-        val = "Your bid got selected"
-        t = Message.objects.create(value=val,user=request.user.username,room=r.id)
+
+        val = str(t.username.username) + " your bid for question(id->" + str(q.randomly_generated_id) + ") got selected"
+        var = str(t.username.username) + "_" + str(q.student.username.username)
+        t = Message.objects.create(value=val,user=request.user.username,room=var)
         t.save()        
         
         return redirect('stu_dashboard')
