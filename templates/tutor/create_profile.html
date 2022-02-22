@@ -24,9 +24,14 @@
                 <div class="input_field"> <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
                     <input type="text" name="proof" placeholder="Drive Link To Proof" required />
                   </div>
-                <div class="input_field"> <span><i aria-hidden="true" class="fa fa-lock"></i></span>
-                  <input type="text" name="area" placeholder=" Area of Expertise" required />
-                </div>
+                
+                {% comment %} <div class="input_field" style="display:none;" id="area_of_expertise_input"> <span><i aria-hidden="true" class="fa fa-lock"></i></span> {% endcomment %}
+                  <select class="input_field" name="area" required>
+                    <option value="Coding" selected>Coding</option>
+                    <option value="Maths">Maths</option>
+                    <option value="Science">Science</option>
+                  </select>
+                {% comment %} </div> {% endcomment %}
                 {% if msg|length %}
                 <p>{{msg}}</p>
                 {% endif %} 
