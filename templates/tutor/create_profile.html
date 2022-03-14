@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/tutorbio.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="form_wrapper">
+        <div class="form_container">
+          <div class="title_container">
+            <h2>Complete Your Profile</h2>
+          </div>
+          <div class="row clearfix">
+            <div class="">
+              <form method="POST" action="{% url 'create_profile' %}">
+                {% csrf_token %}
+                <div class="input_field"> <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
+                  <input type="text" name="education" placeholder="Education Status" required />
+                </div>
+                <div class="input_field"> <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
+                    <input type="text" name="proof" placeholder="Drive Link To Proof" required />
+                  </div>
+                
+                {% comment %} <div class="input_field" style="display:none;" id="area_of_expertise_input"> <span><i aria-hidden="true" class="fa fa-lock"></i></span> {% endcomment %}
+                  <select class="input_field" name="area" required>
+                    <option value="Coding" selected>Coding</option>
+                    <option value="Maths">Maths</option>
+                    <option value="Science">Science</option>
+                  </select>
+                {% comment %} </div> {% endcomment %}
+                {% if msg|length %}
+                <p>{{msg}}</p>
+                {% endif %} 
+                <div class="input_field checkbox_option" >
+                    <input type="checkbox" id="c1" name="is_tutor">
+                    <label for="c1">Terms and Conditions</label>
+                </div> 
+                <input class="button" type="submit" value="Register" />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+</body>
+</html>

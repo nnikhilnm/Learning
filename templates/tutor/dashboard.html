@@ -1,0 +1,154 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    
+    <input type="checkbox" id="sidebar-toggle">
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h3 class="brand">
+                <span class="ti-unlink"></span> 
+                <span>AsgnBuddy</span>
+            </h3> 
+            <label for="sidebar-toggle" class="ti-menu-alt"></label>
+        </div>
+        
+        <div class="sidebar-menu">
+            <ul>
+                <li>
+                    <a href="">
+                        <span class="ti-home"></span>
+                        <span>Home</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="{% url 'todo_list'%}">
+                        <span class="ti-agenda"></span>
+                        <span>To-Do List</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="{% url 'projects'%}">
+                        <span class="ti-folder"></span>
+                        <span>Projects</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'ticket' %}">
+                        <span class="ti-settings"></span>
+                        <span>Submit a ticker</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    
+    <div class="main-content">
+        
+        <header>
+            <div class="search-wrapper">
+                <span>Welcome {{user.username |capfirst}}</span>
+            </div>
+            
+            <div class="social-icons">
+                <span class="ti-bell"></span>
+                <span ><a  class="ti-comment" href="{% url 'chat:home' %}" ></a></span>
+                <span ><a href="{% url 'logout' %}">Logout</a></span>
+                <div></div>
+            </div>
+        </header>
+        
+        <main>
+            
+            <h2 class="dash-title">Overview</h2>
+            
+            <div class="dash-cards">
+                <div class="card-single">
+                    <div class="card-body">
+                        <span class="ti-briefcase"></span>
+                        <div>
+                            <h5>Account Balance</h5>
+                            <h4>$30,659.45</h4>
+                        </div>
+                    </div>
+                     
+                </div>
+                
+                <div class="card-single">
+                    <div class="card-body">
+                        <span class="ti-star"></span>
+                        <div>
+                            <h5>Review</h5>
+                            {%if rating%}
+                            <h4>{{rating}}</h4>
+                            {%else %}
+                            {% endif%}
+                        </div>
+                    </div>
+                     
+                </div>
+                
+                <div class="card-single">
+                    <div class="card-body">
+                        <span class="ti-check-box"></span>
+                        <div>
+                            <h5>Questions Answered</h5>
+                            <h4>{{question | length}}</h4>
+                        </div>
+                    </div>
+                     
+                </div>
+            </div>
+            
+            
+            <section class="recent">
+                <div class="activity-grid">
+                    <div class="activity-card">
+                        <h3>Recent activity</h3>
+                        
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Project</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
+                                        <th>Urgency</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for q in question %}
+                                    <tr>
+                                        <td>{{q.id}}</td>
+                                        <td>{{q.project}}</td>
+                                        <td>{{q.cost}}</td>
+                                        <td>{{q.day}}</td>
+                                        <td>
+                                            <span class="badge success">{{q.status}}</span>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+        </main>
+        
+    </div>
+    
+</body>
+</html>

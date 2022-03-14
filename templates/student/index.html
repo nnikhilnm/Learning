@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    
+    <input type="checkbox" id="sidebar-toggle">
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h3 class="brand">
+                <span class="ti-unlink"></span> 
+                <span>AsgnBuddy</span>
+            </h3> 
+            <label for="sidebar-toggle" class="ti-menu-alt"></label>
+        </div>
+        
+        <div class="sidebar-menu">
+            <ul>
+                <li>
+                    <a href="{% url 'stu_dashboard' %}">
+                        <span class="ti-home"></span>
+                        <span>Home</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="{% url 'postquestion' %}">
+                        <span class="ti-agenda"></span>
+                        <span>Post A Question</span>
+                    </a>
+                </li>
+                
+                {% comment %} <li>
+                    <a href="{% url 'stu_bid' %}">
+                        <span class="ti-folder"></span>
+                        <span>My Orders</span>
+                    </a>
+                </li> {% endcomment %}
+                <li>
+                    <a href="{% url 'stu_ticket' %}">
+                        <span class="ti-settings"></span>
+                        <span>Submit a ticket</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    
+    <div class="main-content">
+        
+        <header>
+            <div class="search-wrapper">
+                <span>Welcome {{name}}</span>
+            </div>
+            
+            <div class="social-icons">
+                <span class="ti-bell"></span>
+                <span ><a  class="ti-comment" href="{% url 'chat:home' %}" ></a></span>
+                <span ><a href="{% url 'logout' %}">Logout</a></span>
+                <div></div>
+            </div>
+        </header>
+        
+        <main>
+            
+            <h2 class="dash-title">Overview</h2>
+            
+            <div class="dash-cards">
+                <div class="card-single">
+                    <div class="card-body">
+                        <span class="ti-briefcase"></span>
+                        <div>
+                            <h5>Questions Posted</h5>
+                            <h4>{{question|length}}</h4>
+                        </div>
+                    </div>
+                     
+                </div>
+                
+                <div class="card-single">
+                    <div class="card-body">
+                        <span class="ti-check-box"></span>
+                        <div>
+                            <h5>Completed</h5>
+                            <h4>{{count}}</h4>
+                        </div>
+                    </div>
+                     
+                </div>
+                
+               
+            </div>
+            
+            
+            <section class="recent">
+                <div class="activity-grid">
+                    <div class="activity-card">
+                        <h3>Recent Posted Questions</h3>
+                        
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Discription</th>
+                                        <th style="width: 110px;">Start Date</th>
+                                        <th>Urgency</th>
+                                        <th>Question id</th>
+                                        <th>File</th>
+                                        <th>Bids</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for q in question %}
+                                    <tr>
+                                        <td>{{q.category}}</td>
+                                        <td>{{q.description}}</td>
+                                        <td>{{q.date}}<br>{{q.time}}</td>
+                                        <td>{{q.urgency}}</td>
+                                        <td>{{q.randomly_generated_id}}
+                                        <td><a type="download" href="../../{{q.upload}}" style="color:blue" download>Link</a></td>
+                                        
+                                        <td>
+                                            
+                                            <a href="/student/{{q.id}}"><button id="{{q.id}}" class="badge success">Bids</button></a>
+                                            {% comment %} <a href="{% url 'stu_bid' q.id %}" data-id="{{q.id}}" id="{{q.id}}" class="badge success">Bids</a> {% endcomment %}
+                                            
+                                        </td>
+
+                                    </tr>
+                                    {% endfor %}
+                                    
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    </div>
+                </div>
+            </section>
+            
+        </main>
+        
+    </div>
+    
+</body>
+</html>

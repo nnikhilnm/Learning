@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Complete Your Profile</h1>
+    <form  method="POST">
+        {% csrf_token %}
+        <input name="education" required>  
+        <label for="c1"> Current Education</label><br> 
+        <input name="proof" required> 
+        <label for="c1"> Upload a proof</label><br> 
+        <input name="area" required>  
+        <label for="c1"> Area of Expertise</label><br> 
+        {% if msg|length %}
+        <p>{{msg}}</p>
+        {% endif %} 
+        <input type="checkbox" id="c1" name="is_tutor" value="True">
+        <label for="c1"> Term And Conditions</label><br>      
+        <button type="submit">SUBMIT</button>
+    </form>
+</body>
+</html>

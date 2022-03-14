@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+    <link rel="stylesheet" href="{% static 'css/todo.css' %}">
+    <style>
+        .filter{
+            padding: 10px;
+            border-radius: 5px;
+            border: 3px solid;
+        }
+    </style>
+</head>
+<body>
+    
+    <input type="checkbox" id="sidebar-toggle">
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h3 class="brand">
+                <span class="ti-unlink"></span> 
+                <span>AsgnBuddy</span>
+            </h3> 
+            <label for="sidebar-toggle" class="ti-menu-alt"></label>
+        </div>
+        
+        <div class="sidebar-menu">
+            <ul>
+                <li>
+                    <a href="{% url 'dashboard'%}">
+                        <span class="ti-home"></span>
+                        <span>Home</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="{% url 'todo_list'%}">
+                        <span class="ti-agenda"></span>
+                        <span>To-Do List</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="{% url 'projects'%}">
+                        <span class="ti-folder"></span>
+                        <span>Projects</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'ticket' %}">
+                        <span class="ti-settings"></span>
+                        <span>Submit a ticket</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    
+    <div class="main-content">
+        
+        <header>
+            <div class="search-wrapper">
+                <span>Welcome</span>
+            </div>
+            
+            <div class="social-icons">
+                <span class="ti-bell"></span>
+                <span ><a  class="ti-comment" href="{% url 'chat:home' %}" ></a></span>
+                <span ><a href="{% url 'logout' %}">Logout</a></span>
+                <div></div>
+            </div>
+        </header>
+        
+        <main>
+            
+            <h2 class="dash-title">Overview</h2>
+            
+            <div class="dash-cards">
+                <div class="card-single">
+                    <div class="card-body">
+                        <span class="ti-briefcase"></span>
+                        <div>
+                            <h5>On Going Projects</h5>
+                            <h4>{{count}}</h4>
+                        </div>
+                    </div>
+                     
+                </div>
+                
+                <div class="card-single">
+                    <div class="card-body">
+                        <span class="ti-agenda"></span>
+                        <div>
+                            <h5>Under Review</h5>
+                            <h4>{{count1}}</h4>
+                        </div>
+                    </div>
+                     
+                </div>
+                
+                <div class="card-single">
+                    <div class="card-body">
+                        <span class="ti-check-box"></span>
+                        <div>
+                            <h5>Questions Answered</h5>
+                            <h4>{{count2}}</h4>
+                        </div>
+                    </div>
+                     
+                </div>
+            </div><br>
+            <div> Filter by status</div><br>
+            <a class="filter" href="{% url 'todo_list'%}">All</a>
+            <a class="filter" href="{% url 'open' %}">open</a>
+            <a class="filter" href="{% url 'progress' %}">Progress</a>
+            <a class="filter" href="{% url 'declined' %}">Declined</a>
+            <a class="filter" href="{% url 'delivered' %}">Delivered</a>
+            <a class="filter" href="{% url 'completed' %}">Completed</a>
+            <a class="filter" href="{% url 'dispute' %}">Dispute</a>
+    
+            <section class="recent">
+                <div class="activity-grid">
+                    <div class="activity-card">
+                        <h3>Projects</h3>
+                        
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Project</th>
+                                        <th>Student</th>
+                                        <th>Due Date</th>
+                                        <th>Status</th>
+                                        <th>Details</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                {% for b in bid%}
+                                    <tr>
+                                        
+                                        <td>{{b.project}}</td>
+                                        <td>{{b.project.student|capfirst}}</td>
+                                        <td>{{b.project.date}}</td>
+                                        <td>
+                                            <span class="badge dispute">{{b.status}}</span>
+                                        </td>
+
+                                        <td>
+                                            <span class="btnSelect" id="badge" style="border:none; padding: .2rem 1rem; border-radius: 20px;font-weight: 700;font-size: .7rem;background: #DEF7EC;color: var(--main-color); cursor: pointer;"  data-hex={{b.project}} data-hex2="{{b.project.student|capfirst}}" data-hex3={{b.project.date}}>View Details</span>
+                                        </td>
+                                    </tr>
+                                {% endfor %} 
+                                </tbody>
+                            </table>
+                        </div>
+                    
+                    </div>
+                    <div class="summary">
+                        <div class="summary-card">
+                            <form action="{% url 'final_submit' %}" method="POST">
+                            {% csrf_token %}
+                                <div class="summary-single">
+                                    <span class="ti-align-justify"></span>
+                                    <div>
+                                        <h5>Discription</h5>
+                                        <small class="prodis" id="prodisc"></small>
+                                    </div>
+                                </div>
+                                <div class="summary-single">
+                                    <span class="ti-files"></span>
+                                    <div>
+                                        <h5>Attached Files</h5>
+                                        <a id="prolinks" download>Link</a>
+                                    </div>
+                                </div>
+                                <div class="summary-single">
+                                    <span class="ti-money"></span>
+                                    <div>
+                                        <h6 id="question_id"> </h6><input style="display:none" name="urls" id="ques_id" required>
+                                        <h5>Bid</h5>
+                                        <input type="text" name="Bid" placeholder="Amount in $">
+                                        <br>
+                                        <br>
+                                        <input type="text" name="message" placeholder="Message To Student" class="message">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="text-center">
+                                    <button type="submit">
+                                        Submit
+                                    </button>
+                                </div> 
+                            </form>
+                        </div>
+                       
+                    </div>
+                </div>
+            </section>
+            
+        </main>
+        
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+     <!-- <script src="todo.js"></script>    -->
+     <script>
+            // code to read selected table row cell data (values).
+            $(document).ready(function(){
+            $(".btnSelect").on('click',function(e){
+                console.log('laura');
+                 var currentRow=$(this).closest("tr");
+                 var col1=e.currentTarget.dataset.hex2;
+                 var col2=e.currentTarget.dataset.hex3;
+                 var col3=e.currentTarget.dataset.hex;
+                 console.log(e.currentTarget.dataset.hex)
+                 var data=col1+"\n"+col2;
+                 document.getElementById("question_id").innerHTML=col3;
+                 document.getElementById("ques_id").value=col3;
+                 document.getElementById("prodisc").innerHTML = col1;
+                 document.getElementById("prolinks").href = col2;
+
+            });
+        });
+    </script>
+    <script>
+        var a=document.getElementById('display')
+        var b=a.firstElementChild();
+        console.log(b);
+</script>
+    
+</body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+    <link rel="stylesheet" href="{% static 'css/postquestion.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;700;800&display=swap"rel="stylesheet"/>
+    <!-- Line Awesome CDN Link -->
+    <link rel="stylesheet"href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"/>
+</head>
+<body>
+    
+    <input type="checkbox" id="sidebar-toggle">
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h3 class="brand">
+                <span class="ti-unlink"></span> 
+                <span>AsgnBuddy</span>
+            </h3> 
+            <label for="sidebar-toggle" class="ti-menu-alt"></label>
+        </div>
+        
+        <div class="sidebar-menu">
+            <ul>
+                <li>
+                  <a href="{% url 'stu_dashboard' %}">
+                    <span class="ti-home"></span>
+                    <span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="{% url 'postquestion' %}">
+                    <span class="ti-agenda"></span>
+                    <span>Post A Question</span>
+                </a>
+            </li>
+
+            
+            {% comment %} <li>
+                <a href="{% url 'stu_bid' %}">
+                    <span class="ti-folder"></span>
+                    <span>My Orders</span>
+                </a>
+            </li> {% endcomment %}
+            <li>
+                <a href="{% url 'stu_ticket' %}">
+                    <span class="ti-settings"></span>
+                    <span>Submit a ticket</span>
+                </a>
+            </li>
+            </ul>
+        </div>
+    </div>
+    
+    
+    <div class="main-content">
+        
+        <header>
+            <div class="search-wrapper">
+                <span>Welcome {{name}}</span>
+                <span><img style="width:20px; border-radius:50%;" src={{stu.avtar}}></span>
+            </div>
+            
+            <div class="social-icons">
+              <span class="ti-bell"></span>
+              <span ><a  class="ti-comment" href="{% url 'chat:home' %}" ></a></span>
+              <span ><a href="{% url 'logout' %}">Logout</a></span>
+              <div></div>
+          </div>
+        </header>
+        
+        <main>
+            
+            <h2 class="dash-title">Overview</h2>
+            
+            <div class="dash-cards">
+                <div class="card-single">
+                    <div class="card-body">
+                        <span class="ti-briefcase"></span>
+                        <div>
+                            <h5>Questions Posted</h5>
+                            <h4>{{que}}</h4>
+                        </div>
+                    </div>
+                     
+                </div>
+                
+                <div class="card-single">
+                    <div class="card-body">
+                        <span class="ti-check-box"></span>
+                        <div>
+                            <h5>Completed</h5>
+                            <h4>{{aaa}}</h4>
+                        </div>
+                    </div>
+                     
+                </div>
+                
+               
+                <div class="card-single">
+                    <div class="card-body">
+                        <span class="ti-blackboard"></span>
+                        <div>
+                            <h5>Tutoring Sessions</h5>
+                            <h4>3</h4>
+                        </div>
+                    </div>
+                     
+                </div>
+            </div>
+            
+            
+            <section class="recent">
+                
+                    <div class="activity-card">
+                        <h3 style="padding: 1vw;">Post A Question</h3>
+                        {%if msg%}
+                            <p class="text-primary text-center">{{msg}}</p>
+                        {%endif%}
+                        
+                        
+                            <div class="questionform">
+                                <form method="POST" id="myform" action="{% url 'postquestion' %}" enctype="multipart/form-data">
+                                  {% csrf_token %}
+                                      <div class="row">
+                                        {% if errors %}
+                                            {% for field in form %}
+                                                {% for error in field.errors %}
+                                                    <div class="alert alert-danger">
+                                                        <strong>{{ error|escape }}</strong>
+                                                    </div>
+                                                {% endfor %}
+                                            {% endfor %}
+                                            {% for error in form.non_field_errors %}
+                                                <div class="alert alert-danger">
+                                                    <strong>{{ error|escape }}</strong>
+                                                </div>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                    <div class="main-container">
+                                        <select style="display:none;"  name="student" ><option value={{stu.id}}  select>{{stu}}</option></select>
+                                        <input id="datePicker" name="date" style="display:none;">
+                                        <input id="timePicker" name="time" style="display:none;">
+                                        
+                                        <h2>Select Category</h2>
+                                        <div class="radio-buttons">
+                                          <label class="custom-radio">
+                                            <input type="radio" name="category" value="Science" checked />
+                                            <span class="radio-btn"
+                                              ><i class="las la-check"></i>
+                                              <div class="hobbies-icon">
+                                                <i class="las la-flask"></i>
+                                                <h3>Science</h3>
+                                              </div>
+                                            </span>
+                                          </label>
+                                          <label class="custom-radio">
+                                            <input type="radio" name="category" value="Maths" />
+                                            <span class="radio-btn"
+                                              ><i class="las la-check"></i>
+                                              <div class="hobbies-icon">
+                                                <i class="las la-calculator"></i>
+                                                <h3>Maths</h3>
+                                              </div>
+                                            </span>
+                                          </label>
+                                          <label class="custom-radio">
+                                            <input type="radio" name="category" value="Programming" />
+                                            <span class="radio-btn"
+                                              ><i class="las la-check"></i>
+                                              <div class="hobbies-icon">
+                                                <i class="las la-laptop-code"></i>
+                                                <h3>Programming</h3>
+                                              </div>
+                                            </span>
+                                          </label>
+                                          <label class="custom-radio">
+                                            <input type="radio" name="category" value="others" />
+                                            <span class="radio-btn"
+                                              ><i class="las la-check"></i>
+                                              <div class="hobbies-icon">
+                                                <i class="las la-globe-americas"></i>
+                                                <h3>Others</h3>
+                                              </div>
+                                            </span>
+                                          </label>
+                                          <h2>Discription</h2>
+                                          <textarea name="description" id="discrip" ></textarea>
+                                          <h2>Urgency</h2>
+                                          <input type="text" name="urgency" placeholder="Mention Day and Hours" style="margin: 0 0  1vh 0;">
+                                          <h2>Upload Necesary Files</h2>
+                                          <div class="drop-zone">
+                                            <span class="drop-zone__prompt">Drop file here or click to upload<br>(Zip all Files and upload)</span>
+                                            <input type="file" name="upload" class="drop-zone__input">
+                                          </div>
+                                        </form>
+                                          <button type="button" id='btn1' class="sub_btn" onclick="time1()" >Submit</button>
+                                        </div>
+                                      </div> 
+                               
+                            </div>
+                        
+                </div>
+                <script>
+                  
+                  function time1()
+{
+  var today = new Date();
+var time = zero(today.getHours()) + ":" + zero(today.getMinutes()) + ":" + zero(today.getSeconds());
+  document.getElementById('timePicker').value = time;
+  document.getElementById('myform').submit();
+}
+
+                </script>
+            </section>
+            
+        </main>
+        
+    </div>
+    <script>
+        document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
+  const dropZoneElement = inputElement.closest(".drop-zone");
+
+  dropZoneElement.addEventListener("click", (e) => {
+    inputElement.click();
+  });
+
+  inputElement.addEventListener("change", (e) => {
+    if (inputElement.files.length) {
+      updateThumbnail(dropZoneElement, inputElement.files[0]);
+    }
+  });
+
+  dropZoneElement.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    dropZoneElement.classList.add("drop-zone--over");
+  });
+
+  ["dragleave", "dragend"].forEach((type) => {
+    dropZoneElement.addEventListener(type, (e) => {
+      dropZoneElement.classList.remove("drop-zone--over");
+    });
+  });
+
+  dropZoneElement.addEventListener("drop", (e) => {
+    e.preventDefault();
+
+    if (e.dataTransfer.files.length) {
+      inputElement.files = e.dataTransfer.files;
+      updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
+    }
+
+    dropZoneElement.classList.remove("drop-zone--over");
+  });
+});
+
+/**
+ * Updates the thumbnail on a drop zone element.
+ *
+ * @param {HTMLElement} dropZoneElement
+ * @param {File} file
+ */
+function updateThumbnail(dropZoneElement, file) {
+  let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
+
+  // First time - remove the prompt
+  if (dropZoneElement.querySelector(".drop-zone__prompt")) {
+    dropZoneElement.querySelector(".drop-zone__prompt").remove();
+  }
+
+  // First time - there is no thumbnail element, so lets create it
+  if (!thumbnailElement) {
+    thumbnailElement = document.createElement("div");
+    thumbnailElement.classList.add("drop-zone__thumb");
+    dropZoneElement.appendChild(thumbnailElement);
+  }
+
+  thumbnailElement.dataset.label = file.name;
+
+  // Show thumbnail for image files
+  if (file.type.startsWith("image/")) {
+    const reader = new FileReader();
+
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
+    };
+  } else {
+    thumbnailElement.style.backgroundImage = null;
+  }
+}
+    </script> 
+    <script>
+      Date.prototype.toDateInputValue = (function() {
+        var local = new Date(this);
+        local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+        return local.toJSON().slice(0,10);
+    });
+    
+document.getElementById('datePicker').value = new Date().toDateInputValue();
+//document.getElementById('btn1').addEventListener('click',time());
+function zero(str)
+{
+  str=String(str)
+  console.log(str.length)
+  if (str.length===1)
+  {
+    console.log('sdsds');
+    return `0${str}`;
+  }
+  else
+      {return str;}
+}
+
+    </script>
+</body>
+</html>
