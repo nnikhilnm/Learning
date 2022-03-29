@@ -8,3 +8,8 @@ class QuestionForm(forms.ModelForm):
     class Meta:
         model = Question
         fields = ['student', 'category','description','upload','urgency','date','time']
+
+# class FinalForm(forms.ModelForm):
+#     class Meta:
+#         model = Bid
+#         fields = ['student', 'category','description','upload','urgency','date','time']

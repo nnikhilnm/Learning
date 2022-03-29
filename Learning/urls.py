@@ -43,7 +43,11 @@ urlpatterns = [
     # path('student/bid', views.stu_bid,name="stu_bid"),
     # path('student/(?P<bid_id>[0-9]*)', views.stu_bid, name = "stu_bid"),
     path("student/<int:myid>", views.stu_bid, name='stu_bid'),
+    path("student/bid_approve_tutor/",views.bid_approve_tutor,name='bid_approve_1'),
     path("student/bid_approve/",views.bid_approve,name='bid_approve'),
+    # path("student/bid_approve/handlerequest/",views.bid_approve,name='handle_request'),
+    path("handlerequest/<str:room>/",views.handlerequest,name='handle_request'),
+    
     path("logout/", views.logout_user, name='logout'),
     # path("message/", views.message, name='message'),
     

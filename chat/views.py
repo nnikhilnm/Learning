@@ -74,12 +74,15 @@ def send(request):
         form.save()
     else:
         print(form.errors)
-    return HttpResponseRedirect("/chat/"+r)
+    return HttpResponseRedirect("/chat/"+str(r))
         
 
 def getMessages(request, room):
     room_details = Room.objects.get(name=room)
-    messages = Message.objects.filter(room=room_details.id)
+    print('success')
+    print(room_details)
+    messages = Message.objects.filter(room=room_details.name)
+    print(messages)
     return JsonResponse({"messages":list(messages.values())})
 
 def photoform(request):

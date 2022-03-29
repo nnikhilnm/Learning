@@ -22,6 +22,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'p5kww9!!jv81rx%yc6x+3o=i$^r9ybqgns@+a-mdix8s@=&i%$'
 
+razorpay_id="rzp_test_n3Zu4MhKCICugS"
+razorpay_account_id="T7LJuVNrwHkXBnhWkb9qRbQT"
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 

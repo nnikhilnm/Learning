@@ -6,12 +6,20 @@ from django.http import HttpResponse, JsonResponse, Http404
 from student.models import *
 from django.core.mail import EmailMessage
 from django.contrib import messages
-from django.conf import settings
+# from django.conf import settings
 import datetime
 from datetime import timedelta
 from student.forms import *
 from chat.models import *
 import os
+from .settings import razorpay_id,razorpay_account_id
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.sites.shortcuts import get_current_site
+import razorpay
+from django.template.loader import get_template 
+from io import BytesIO
+# from xhtml2pdf import pisa
+razorpay_client = razorpay.Client(auth=(razorpay_id, razorpay_account_id))
 
 
 def index(request):
@@ -276,9 +284,11 @@ def stu_bid(request, myid):
     print(myid)
     bid = Bid.objects.filter(project=que)
     print(bid)
+
     context = {
         'name': request.user,
-        'bid' : bid
+        'bid' : bid,
+        'razorpay_merchant_id':razorpay_id
     }
     return render(request, 'student/bid.html', context)
 
@@ -507,3 +517,125 @@ def todo_list_dispute(request):
 
 def final_submit(request):
     pass
+
+def bid_approve_tutor(request):
+    if request.method=='POST':
+        t=Tutor.objects.get(id=request.POST.get('tutor_id'))
+        q=Question.objects.get(id=request.POST.get('ques_id'))
+        b=Bid.objects.get(tutor=t,project=q)
+        callback_url = 'http://'+ str(get_current_site(request))+"/handlerequest/"+request.POST.get('tutor_id')+'/'
+        print(callback_url)
+        print(callback_url)
+        notes = {'order-type': "basic order from the website", 'key':'value'}
+        razorpay_order = razorpay_client.order.create(dict(amount=float(b.cost)*100, currency="INR", notes = notes, receipt=str(b.id), payment_capture='0'))
+        print(razorpay_order['id'])
+        b.razorpay_order_id = razorpay_order['id']
+        b.save()
+        
+        return render(request,'student/bid_approve.html',{'order_id': razorpay_order['id'], 'orderId':b.id, 'razorpay_merchant_id':razorpay_id, 'callback_url':callback_url,'bid':b,'cost':float(b.cost)*100})
+    else:
+        return HttpResponse('404 Not Found')
+
+@csrf_exempt
+def handlerequest(request,room):
+    print('asdasd')
+    if request.method == "POST":
+        # try:
+        payment_id = request.POST.get('razorpay_payment_id', '')
+        order_id = request.POST.get('razorpay_order_id','')
+        signature = request.POST.get('razorpay_signature','')
+        params_dict = { 
+        'razorpay_order_id': order_id, 
+        'razorpay_payment_id': payment_id,
+        'razorpay_signature': signature
+        }
+        print(params_dict)
+        order_db=Bid.objects.get(razorpay_order_id=order_id)
+        # try:
+        #     order_db = Bid.objects.get(razorpay_order_id=order_id)
+        # except:
+        #     return HttpResponse("505 Not Found")
+        order_db.razorpay_payment_id = payment_id
+        order_db.razorpay_signature = signature
+        order_db.save()
+        result = razorpay_client.utility.verify_payment_signature(params_dict)
+        print(result)
+        if result==True:
+            amount = float(order_db.cost) * 100   #we have to pass in paisa
+            try:
+                razorpay_client.payment.capture(payment_id, amount)
+                order_db.payment_status = 1
+                order_db.save()
+
+                ## For generating Invoice PDF
+                template = get_template('invoice.html')
+                data = {
+                    'order_id': order_db.order_id,
+                    'transaction_id': order_db.razorpay_payment_id,
+                    'user_email': request.user.email,
+                    'date': str(order_db.datetime_of_payment),
+                    'name': str(request.user.first_name)+str(request.user.last_name),
+                    'order': order_db,
+                    'amount': order_db.cost,
+                }
+                html  = template.render(data)
+                result = BytesIO()
+                # pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)#, link_callback=fetch_resources)
+                # pdf = result.getvalue()
+                # filename = 'Invoice_' + data['order_id'] + '.pdf'
+
+                # mail_subject = 'Recent Order Details'
+                # # message = render_to_string('firstapp/payment/emailinvoice.html', {
+                # #     'user': order_db.user,
+                # #     'order': order_db
+                # # })
+                # context_dict = {
+                #     'user': order_db.user,
+                #     'order': order_db
+                # }
+                # template = get_template('emailinvoice.html')
+                # message  = template.render(context_dict)
+                # to_email = order_db.user.email
+                # # email = EmailMessage(
+                # #     mail_subject,
+                # #     message, 
+                # #     settings.EMAIL_HOST_USER,
+                # #     [to_email]
+                # # )
+
+                # # for including css(only inline css works) in mail and remove autoescape off
+                # email = EmailMultiAlternatives(
+                #     mail_subject,
+                #     "hello",       # necessary to pass some message here
+                #     settings.EMAIL_HOST_USER,
+                #     [to_email]
+                # )
+                # email.attach_alternative(message, "text/html")
+                # email.attach(filename, pdf, 'application/pdf')
+                # email.send(fail_silently=False)
+                t=Tutor.objects.get(id=room)
+                order_db.status='Progress'
+                order_db.save()
+                all_bid=Bid.objects.filter(project=order_db.project)
+                for bid in all_bid:
+                    if bid!=order_db:
+                        bid.status='Declined'
+                        bid.save()
+                
+                print(t)
+                print(order_db)
+                val = str(t.username.username) + " your bid for question(id->" + str(order_db.project.randomly_generated_id) + ") got selected"
+                var = str(t.username.username) + "_" + str(order_db.project.student.username.username)
+                t = Message.objects.create(value=val,user=request.user.username,room=var)
+                t.save()    
+                return render(request, 'paymentsuccess.html',{'id':order_db.id})
+            except:
+                order_db.payment_status = 2
+                order_db.save()
+                return render(request, 'paymentfailed.html')
+        else:
+            order_db.payment_status = 2
+            order_db.save()
+            return render(request, 'paymentfailed.html')
+        # except:
+        #     return HttpResponse("505 not found")

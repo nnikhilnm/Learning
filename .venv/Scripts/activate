@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\shive\Documents\Learning\.venv"
+VIRTUAL_ENV="C:\Users\shive\Desktop\New folder (3)\Learning\.venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

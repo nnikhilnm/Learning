@@ -7,6 +7,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
     <link rel="stylesheet" href="{% static 'css/todo.css' %}">
+    
     <style>
         .filter{
             padding: 10px;
@@ -151,7 +152,7 @@
                                         </td>
 
                                         <td>
-                                            <span class="btnSelect" id="badge" style="border:none; padding: .2rem 1rem; border-radius: 20px;font-weight: 700;font-size: .7rem;background: #DEF7EC;color: var(--main-color); cursor: pointer;"  data-hex={{b.project}} data-hex2="{{b.project.student|capfirst}}" data-hex3={{b.project.date}}>View Details</span>
+                                            <span class="btnSelect" id="badge" style="border:none; padding: .2rem 1rem; border-radius: 20px;font-weight: 700;font-size: .7rem;background: #DEF7EC;color: var(--main-color); cursor: pointer;"  data-hex="{{b.project.description}}" data-hex2="{{b.project.upload}}" data-hex3={{b.project.date}} data-hex4="{{b.cost}}" data-hex5="{{b.id}}">View Details</span>
                                         </td>
                                     </tr>
                                 {% endfor %} 
@@ -162,7 +163,7 @@
                     </div>
                     <div class="summary">
                         <div class="summary-card">
-                            <form action="{% url 'final_submit' %}" method="POST">
+                            <form id ="dfsdf" action="{% url 'final_submit' %}" method="POST">
                             {% csrf_token %}
                                 <div class="summary-single">
                                     <span class="ti-align-justify"></span>
@@ -181,12 +182,19 @@
                                 <div class="summary-single">
                                     <span class="ti-money"></span>
                                     <div>
-                                        <h6 id="question_id"> </h6><input style="display:none" name="urls" id="ques_id" required>
+                                        {% comment %} <h6 id="question_id"> </h6><input style="display:none" name="urls" id="ques_id" required> {% endcomment %}
                                         <h5>Bid</h5>
-                                        <input type="text" name="Bid" placeholder="Amount in $">
-                                        <br>
-                                        <br>
-                                        <input type="text" name="message" placeholder="Message To Student" class="message">
+                                        <small id="Bid" ></small>
+                                    </div>
+                                </div>
+                                <div class="summary-single">
+                                    <span class="ti-file"></span>
+                                    <div>
+                                        <h5>Upload Neccesary Files</h5>
+                                        <div class="drop-zone">
+                                          <input type="file" name="final_upload" class="drop-zone__input">
+                                        </div>
+                                        <h6 id="question_id"> </h6><input style="display:none" name="id" id="ques_id" required>
                                     </div>
                                 </div>
                                 <br>
@@ -213,24 +221,26 @@
             $(".btnSelect").on('click',function(e){
                 console.log('laura');
                  var currentRow=$(this).closest("tr");
-                 var col1=e.currentTarget.dataset.hex2;
-                 var col2=e.currentTarget.dataset.hex3;
-                 var col3=e.currentTarget.dataset.hex;
+                 var col1=e.currentTarget.dataset.hex;
+                 var col2=e.currentTarget.dataset.hex2;
+                 var col3=e.currentTarget.dataset.hex3;
+                 var col4=e.currentTarget.dataset.hex4;
+                 var col5=e.currentTarget.dataset.hex5;
+                 console.log(col5);
+                 console.log('success')
+                 console.log(col1);
                  console.log(e.currentTarget.dataset.hex)
                  var data=col1+"\n"+col2;
-                 document.getElementById("question_id").innerHTML=col3;
-                 document.getElementById("ques_id").value=col3;
+                 //document.getElementById("question_id").innerHTML=col1;
+                 document.getElementById("ques_id").value=col5;
                  document.getElementById("prodisc").innerHTML = col1;
+                 document.getElementById("Bid").innerHTML = col4;
                  document.getElementById("prolinks").href = col2;
 
             });
         });
     </script>
-    <script>
-        var a=document.getElementById('display')
-        var b=a.firstElementChild();
-        console.log(b);
-</script>
+
     
 </body>
 </html>
