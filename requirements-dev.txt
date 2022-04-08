@@ -1,0 +1,4 @@
+Django ==2.2.9
+requests
+razorpay
+xhtml2pdf
